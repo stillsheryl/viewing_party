@@ -41,5 +41,14 @@ describe "As a visitor" do
       expect(current_path).to eq(root_path)
       expect(page).to have_content('Invalid email or password.')
     end
+
+    it "When I click Sign In without entering anything, I get an error" do
+      visit root_path
+
+      click_button 'Sign In'
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content('Invalid email or password.')
+    end
+    
   end
 end

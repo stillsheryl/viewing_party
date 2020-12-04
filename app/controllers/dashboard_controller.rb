@@ -1,5 +1,8 @@
 class DashboardController < ApplicationController
-  def index; end
+  def index
+    #temp need table
+    @friends = nil
+  end
 
   def discover; end
 end

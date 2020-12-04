@@ -1,3 +1,36 @@
 <h1>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h1>
 
 <%= button_to 'Discover Movies', '/discover', method: 'get' %>
+
+<section id='Friends'>
+  <h2>Friends</h2>
+
+  <%= form_with url: '/add_friend', method: 'post', local: true do |f| %>
+    <%= f.text_field :email , placeholder: "Friend's Email"%>
+    <%= f.submit "Add Friend" %>
+  <% end %>
+
+  <% if @friends == nil %>
+    <p>You currently have no friends</p>
+  <% else %>
+    <% @friends.each do |friend| %>
+      <%= friend.first_name %> <%= friend.last_name %>
+    <% end %>
+  <% end %>
+</section>
+
+<section id='Viewing_Parties'>
+  <h2>Viewing_Parties</h2>
+  <% current_user.parties.each do |party| %>
+    <section id='party-<%= party.id %>'>
+      <%= party.movie.title %><br>
+      <%= party.formatted_date %><br>
+      <%= party.formatted_time %>
+      <% if current_user.id == party.user_id %>
+        <p>Hosting</p>
+      <% else %>
+        <p>Invited</p>
+      <% end %>
+    </section>
+  <% end %>
+</section>

@@ -5,12 +5,16 @@
   <%= f.submit "Find Movies" %>
 <% end %>
 
-<% @titles.each do |title| %>
-  <div class="movie-column">
-    <ul class="movie-results"><%= title[:original_title] %></ul>
-  </div>
+<% if !@titles.all?{|title| title.nil?} %>
+  <% @titles.each do |title| %>
+    <div class="movie-column">
+      <ul class="movie-results"><%= title[:original_title] %></ul>
+    </div>
 
-  <div class="vote-column">
-    <ul>Vote Average: <%= title[:vote_average] %></ul>
-  </div>
+    <div class="vote-column">
+      <ul>Vote Average: <%= title[:vote_average] %></ul>
+    </div>
+  <% end %>
+<% else %>
+    <h4>No results match your search!</h4>
 <% end %>

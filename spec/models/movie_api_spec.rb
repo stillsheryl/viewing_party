@@ -17,7 +17,7 @@ describe MovieApiService do
     end
 
     it ".top_rated_movies" do
-      VCR.use_cassette('top_movies') do
+      VCR.use_cassette('top_rated_movies') do
         expect(MovieApiService.top_rated_movies.class).to eq(Array)
         expect(MovieApiService.top_rated_movies.count).to eq(40)
       end

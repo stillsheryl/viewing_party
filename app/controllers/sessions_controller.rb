@@ -8,18 +8,27 @@ class SessionsController < ApplicationController
         flash[:success] = 'Login Successful!'
         redirect_to '/dashboard'
       else
-        flash[:error] = 'Invalid email or password.'
-        redirect_to root_path
+        error_message
       end
     else
-      flash[:error] = 'Invalid email or password.'
-      redirect_to root_path
+      error_message
     end
   end
 
   def destroy
     session.delete(:user_id)
     flash[:success] = 'Logout Successful!'
+    redirect_to root_path
+  end
+
+  private
+
+  def error_message
+    if params[:password].blank? && params[:email].blank?
+      flash[:error] = 'Fields cannot be blank.'
+    else
+      flash[:error] = 'Invalid email or password.'
+    end
     redirect_to root_path
   end
 end

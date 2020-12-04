@@ -1,6 +1,10 @@
 class MoviesController < ApplicationController
   def index
-    @titles = MovieApiService.movie_search(params[:movie_title])
+    @pet_results
+    if params[:movie_title] != nil && params[:movie_title] != ""
+      @titles = MovieApiService.movie_search(params[:movie_title])
+      
+    end
   end
 
   def top_rated

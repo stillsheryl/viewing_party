@@ -11,8 +11,7 @@ describe "As a registered user" do
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     end
 
-    it "When I make an entry in the search bar, I see my case-insensitive movie title results
-        and the voting average listed on the movies index page" do
+    it "When I make an entry in the search bar, I see my case-insensitive movie title results and the voting average listed on the movies index page" do
       
       VCR.use_cassette('movie_search') do
         visit '/discover'
@@ -36,15 +35,15 @@ describe "As a registered user" do
     end
 
     it "I see no more than 40 results" do
-      VCR.use_cassette('movie_search') do
+      VCR.use_cassette('search_movies') do
         visit '/discover'
-  
+
         fill_in :movie_title,	with: "star"
         click_button 'Find Movies'
         expect(current_path).to eq('/movies')
-  
+
         expect(page).to have_css('.movie-column', count: 40)
-        expect(page).to have_css('.vote-column', count: 40)        
+        expect(page).to have_css('.vote-column', count: 40)
       end
     end
   end

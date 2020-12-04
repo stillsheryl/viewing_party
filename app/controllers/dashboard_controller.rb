@@ -3,6 +3,6 @@ class DashboardController < ApplicationController
     #temp need table
     @friends = nil
   end
-  
+
   def discover; end
 end

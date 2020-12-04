@@ -47,7 +47,7 @@ describe "As a visitor" do
 
       click_button 'Sign In'
       expect(current_path).to eq(root_path)
-      expect(page).to have_content('Invalid email or password.')
+      expect(page).to have_content('Fields cannot be blank.')
     end
     
   end

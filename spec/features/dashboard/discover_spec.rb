@@ -24,12 +24,11 @@ describe 'As a user' do
     user = User.last
     
     click_button('Find Movies')
-    
+
     expect(current_path).to eq('/discover')
+    expect(page).to have_content('Search field cannot be blank')
     expect(page).to have_content("Welcome #{user.first_name} #{user.last_name}")
     expect(page).to have_button('Find Top Rated Movies')
     expect(page).to have_button('Find Movies')
-
   end
-  
 end

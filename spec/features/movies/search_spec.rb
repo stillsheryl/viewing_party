@@ -35,7 +35,7 @@ describe "As a registered user" do
     end
 
     it "I see no more than 40 results" do
-      VCR.use_cassette('search_movies') do
+      VCR.use_cassette('movie_search') do
         visit '/discover'
 
         fill_in :movie_title,	with: "star"

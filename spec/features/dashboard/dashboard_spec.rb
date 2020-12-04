@@ -52,7 +52,7 @@ describe 'As a user' do
     end
   end
 
-  it "text" do
+  it "Party has invited when the user is a guest and not the host" do
     click_link 'Logout'
     User.create(email: 'test@test.com', password: 'testing', first_name: 'James', last_name: 'Morgan')
 

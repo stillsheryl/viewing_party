@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :guests
   has_many :parties, through: :guests
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
 end

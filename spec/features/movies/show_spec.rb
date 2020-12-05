@@ -42,7 +42,7 @@ describe "As a authenticated user" do
 
       within('#details') do
         expect(page).to have_content("Vote Average: #{@movie_details.vote_average}")
-        expect(page).to have_content("Runtime: #{@movie_details.runtime_convertion}")
+        expect(page).to have_content("Runtime: #{@movie_details.runtime_conversion}")
         expect(page).to have_content("Genre(s): #{@movie_details.get_genres}")
       end
     end

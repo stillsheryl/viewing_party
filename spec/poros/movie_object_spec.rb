@@ -59,6 +59,6 @@ describe MovieObject do
   end
 
   it "runtime_convertion converts the integer of runtime into hours and minutes" do
-    expect(@movie.runtime_convertion).to eq('1 hr 46 min')
+    expect(@movie.runtime_conversion).to eq('1 hr 46 min')
   end
 end

@@ -1,5 +1,12 @@
 class MovieObject
-  attr_reader :title, :movie_id, :vote_average, :runtime, :genres, :overview, :cast, :reviews
+  attr_reader :movie_id,
+              :vote_average,
+              :title,
+              :runtime,
+              :genres,
+              :overview,
+              :cast,
+              :reviews
 
   def initialize(attributes)
     @movie_id = attributes[:id]
@@ -16,7 +23,7 @@ class MovieObject
     @reviews.count
   end
 
-  def runtime_convertion
+  def runtime_conversion
     hours = @runtime / 60
     min = @runtime % 60
 

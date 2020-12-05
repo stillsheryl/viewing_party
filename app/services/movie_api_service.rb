@@ -43,4 +43,13 @@ class MovieApiService
 
     titles.flatten
   end
+
+  def self.get_movie_details(movie_id)
+    response = conn.get("/3/movie/") do |movie|
+      movie.path += movie_id
+      movie.params[:append_to_response] = 'reviews,credits'
+    end
+
+    MovieObject.new(parse_data(response))
+  end
 end

@@ -18,4 +18,17 @@ describe 'As a user' do
     expect(page).to have_button('Find Top Rated Movies')
     expect(page).to have_button('Find Movies')
   end
+
+  it "if I try to click on the search button without entering anything, I stay on the discover page" do
+    visit '/discover'
+    user = User.last
+    
+    click_button('Find Movies')
+
+    expect(current_path).to eq('/discover')
+    expect(page).to have_content('Search field cannot be blank')
+    expect(page).to have_content("Welcome #{user.first_name} #{user.last_name}")
+    expect(page).to have_button('Find Top Rated Movies')
+    expect(page).to have_button('Find Movies')
+  end
 end

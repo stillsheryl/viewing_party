@@ -11,17 +11,21 @@ describe 'As a user' do
   end
 
   it "When i click on Find Top Movies in discover I am taken to the top 40 movies link" do
-    visit '/discover'
+    VCR.use_cassette('top_rated_movies') do
+      visit '/discover'
 
-    click_button 'Find Top Rated Movies'
+      click_button 'Find Top Rated Movies'
 
-    expect(current_path).to eq('/movies/top_rated')
+      expect(current_path).to eq('/movies/top_rated')
+    end
   end
 
   it "There are 40 top rated movies on the page" do
-    visit '/movies/top_rated'
+    VCR.use_cassette('top_rated_movies') do
+      visit '/movies/top_rated'
 
-    expect(page).to have_css('.movie-column', count: 40)
-    expect(page).to have_css('.vote-column', count: 40)
+      expect(page).to have_css('.movie-column', count: 40)
+      expect(page).to have_css('.vote-column', count: 40)
+    end
   end
 end

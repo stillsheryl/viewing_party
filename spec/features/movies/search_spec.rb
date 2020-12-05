@@ -35,7 +35,7 @@ describe "As a registered user" do
     end
 
     it "I see no more than 40 results" do
-      VCR.use_cassette('search_movies') do
+      VCR.use_cassette('movie_search') do
         visit '/discover'
 
         fill_in :movie_title,	with: "star"
@@ -45,6 +45,26 @@ describe "As a registered user" do
         expect(page).to have_css('.movie-column', count: 40)
         expect(page).to have_css('.vote-column', count: 40)
       end
+    end
+
+    it "I enter a space, so no results match my search, and I see a message saying so", :vcr do
+      visit '/discover'
+
+      fill_in :movie_title, with: ' '
+      click_button 'Find Movies'
+
+      expect(current_path).to eq('/movies')
+      expect(page).to have_content('No results match your search!')
+    end
+
+    it "testing no match again", :vcr do
+      visit '/discover'
+
+      fill_in :movie_title, with: 'avfawrgba'
+      click_button 'Find Movies'
+
+      expect(current_path).to eq('/movies')
+      expect(page).to have_content('No results match your search!')
     end
   end
 end

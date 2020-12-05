@@ -57,5 +57,13 @@ describe "As a registered user" do
         expect(page). to have_content('You currently have no friends')
       end
     end
+
+    it "Clicking the Add Friend button without entering anything returns an error" do
+      visit '/dashboard'
+
+      click_button('Add Friend')
+
+      expect(page).to have_content("I'm sorry your friend cannot not found.")
+    end
   end
 end

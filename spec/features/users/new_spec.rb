@@ -58,5 +58,24 @@ describe 'User Registration' do
 
       expect(page).to have_content("Password confirmation doesn't match Password")
     end
+
+    it "prefills information that user has already provided, besides the passwords, in the case that a form error occurs" do
+      visit '/registration'
+
+      fill_in 'First name', with: 'Sammie'
+      fill_in 'Last name', with: 'Smith'
+      fill_in 'Email', with: 'sam@email.com'
+      fill_in 'Password', with: 'password'
+
+      click_button 'Register'
+
+      expect(page).to have_content("Password confirmation doesn't match Password")
+
+      expect(find_field('First name').value).to eq 'Sammie'
+      expect(find_field('Last name').value).to eq 'Smith'
+      expect(find_field('Email').value).to eq 'sam@email.com'
+      expect(find_field('Password').value).to eq nil
+      expect(find_field('Password confirmation').value).to eq nil
+    end
   end
 end

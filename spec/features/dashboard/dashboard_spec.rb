@@ -10,8 +10,8 @@ describe 'As a user' do
     click_button 'Sign In'
 
     @current_user = User.last
-    movie = Movie.create!(title: 'Avengers', api_id: 550)
-    @party = Party.create!(user_id: @current_user.id, movie_id: movie.id, date: '1/12/2020', time: '2:00 PM', duration: 220)
+    @movie = Movie.create!(title: 'Avengers', api_id: 550)
+    @party = Party.create!(user_id: @current_user.id, movie_id: @movie.id, date: '1/12/2020', time: '2:00 PM', duration: 220)
   end
 
   it "I am in the dashboard link" do

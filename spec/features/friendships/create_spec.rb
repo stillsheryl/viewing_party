@@ -39,5 +39,23 @@ describe "As a registered user" do
         expect(page).to have_content('Angelina Jolie')
       end
     end
+
+    it "filling in the search bar with an email that does not exist and clicking Add Friend, my friends list does not change and I get an error message saying that my friend cannot be found" do
+      visit '/dashboard'
+
+      within '#Friends' do
+        expect(page).to have_content('You currently have no friends')
+      end
+
+      fill_in :email, with: 'billyjoehenrybob@email.com'
+      click_button('Add Friend')
+
+      expect(current_path).to eq('/dashboard')
+      expect(page).to have_content("I'm sorry your friend cannot not found.")
+
+      within '#Friends' do
+        expect(page). to have_content('You currently have no friends')
+      end
+    end
   end
 end

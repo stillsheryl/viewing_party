@@ -37,8 +37,10 @@ describe "As a authenticated user" do
   it "I can see movie name vote average, runtime, genre's" do
     VCR.use_cassette('movie_details') do
       visit "/movies/#{@movie_details.movie_id}"
+      save_and_open_page
 
       expect(page).to have_content('Your Name.')
+      expect(page).to have_button('Create viewing party for movie')
 
       within('#details') do
         expect(page).to have_content("Vote Average: #{@movie_details.vote_average}")

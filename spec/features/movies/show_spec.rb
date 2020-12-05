@@ -39,6 +39,7 @@ describe "As a authenticated user" do
       visit "/movies/#{@movie_details.movie_id}"
 
       expect(page).to have_content('Your Name.')
+      expect(page).to have_button('Create viewing party for movie')
 
       within('#details') do
         expect(page).to have_content("Vote Average: #{@movie_details.vote_average}")

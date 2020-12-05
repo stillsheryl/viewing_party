@@ -16,6 +16,13 @@ class MovieObject
     @reviews.count
   end
 
+  def runtime_convertion
+    hours = @runtime / 60
+    min = @runtime % 60
+
+    "#{hours} hr #{min} min"
+  end
+
   def formatted_reviews
     reviews = []
 
@@ -31,6 +38,9 @@ class MovieObject
 
     @cast.each do |cast|
       actor_roles << {cast_id: cast[:cast_id], role: "#{cast[:name]} as #{cast[:character]}"}
+      if actor_roles.count == 10
+        break
+      end
     end
 
     actor_roles

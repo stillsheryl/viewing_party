@@ -18,9 +18,9 @@
 </section>
 
 
-<% if @movie.cast %>
+<b>Cast</b><br>
+<% if @movie.cast != []%>
   <section id='cast'>
-      <b>Cast</b><br>
       <% @movie.formatted_cast.each do |cast| %>
         <section id='cast-<%= cast[:cast_id] %>'>
           <%= cast[:role] %>
@@ -29,9 +29,9 @@
   </section>
 <% end %>
 
-<% if @movie.reviews %>
+<b><%= @movie.review_count %> Reviews</b><br>
+<% if @movie.reviews != []%>
   <section id='reviews'>
-    <b><%= @movie.review_count %> Reviews</b><br>
     <% @movie.formatted_reviews.each do |review| %>
       <section id='review-<%= review[:review_id] %>'>
         <b>Author: <%= review[:author] %></b><br>

@@ -32,13 +32,13 @@ class MovieObject
     @cast.each do |cast|
       actor_roles << {cast_id: cast[:cast_id], role: "#{cast[:name]} as #{cast[:character]}"}
     end
-    
+
     actor_roles
   end
 
   def get_genres
     genres = ''
-    if @genres
+    if @genres != []
       @genres.each do |genre|
         if genres == ''
           genres = genre[:name]

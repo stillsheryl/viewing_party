@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    #temp need table
-    @friends = nil
+    @friends = current_user.friends
   end
 
   def discover; end

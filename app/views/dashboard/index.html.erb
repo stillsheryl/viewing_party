@@ -5,12 +5,12 @@
 <section id='Friends'>
   <h2>Friends</h2>
 
-  <%= form_with url: '/add_friend', method: 'post', local: true do |f| %>
+  <%= form_with url: '/friendships/new', method: 'post', local: true do |f| %>
     <%= f.text_field :email , placeholder: "Friend's Email"%>
     <%= f.submit "Add Friend" %>
   <% end %>
 
-  <% if @friends == nil %>
+  <% if @friends.empty? %>
     <p>You currently have no friends</p>
   <% else %>
     <% @friends.each do |friend| %>

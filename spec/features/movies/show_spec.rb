@@ -42,7 +42,7 @@ describe "As a authenticated user" do
 
       within('#details') do
         expect(page).to have_content("Vote Average: #{@movie_details.vote_average}")
-        expect(page).to have_content("Runtime: #{@movie_details.runtime} min")
+        expect(page).to have_content("Runtime: #{@movie_details.runtime_convertion}")
         expect(page).to have_content("Genre(s): #{@movie_details.get_genres}")
       end
     end
@@ -71,8 +71,8 @@ describe "As a authenticated user" do
           expect(page).to have_content("#{@movie_details.cast[0][:name]} as #{@movie_details.cast[0][:character]}")
         end
         #testing the last cast member
-        within("#cast-#{@movie_details.cast[14][:cast_id]}") do
-          expect(page).to have_content("#{@movie_details.cast[14][:name]} as #{@movie_details.cast[14][:character]}")
+        within("#cast-#{@movie_details.cast[9][:cast_id]}") do
+          expect(page).to have_content("#{@movie_details.cast[9][:name]} as #{@movie_details.cast[9][:character]}")
         end
       end
     end

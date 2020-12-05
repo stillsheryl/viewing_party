@@ -21,5 +21,23 @@ describe "As a registered user" do
 
       expect(page).to have_field(:email)
     end
+
+    it "filling in the search bar with an existing email address and clicking Add Friend, that friend gets added to my friends list" do
+      visit '/dashboard'
+
+      within '#Friends' do
+        expect(page).to have_content('You currently have no friends')
+      end
+
+      fill_in :email, with: "#{@user2.email}"
+      click_button('Add Friend')
+
+      @user1.reload
+      expect(current_path).to eq('/dashboard')
+
+      within '#Friends' do
+        expect(page).to have_content('Angelina Jolie')
+      end
+    end
   end
 end

@@ -65,5 +65,31 @@ describe "As a registered user" do
 
       expect(page).to have_content("I'm sorry your friend cannot not found.")
     end
+
+    it "Entering an email of a friend of whom you are already friends with notifies you that you're friends and does not duplicate that person in your friends list" do
+      visit '/dashboard'
+
+      within '#Friends' do
+        expect(page).to have_content('You currently have no friends')
+      end
+
+      fill_in :email, with: 'angie@email.com'
+      click_button('Add Friend')
+
+      expect(current_path).to eq('/dashboard')
+      within '#Friends' do
+        expect(page).to have_content('Angelina Jolie')
+      end
+
+      fill_in :email, with: 'angie@email.com'
+      click_button('Add Friend')
+
+      expect(current_path).to eq('/dashboard')
+      expect(page).to have_content('You are already friends.')
+
+      within '#Friends' do
+        expect(page).to have_content('Angelina Jolie', count: 1)
+      end
+    end
   end
 end

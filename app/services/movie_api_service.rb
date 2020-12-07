@@ -1,10 +1,4 @@
 class MovieApiService
-  def self.conn
-    Faraday.new(url: "https://api.themoviedb.org") do |faraday|
-      faraday.params[:api_key] = ENV['MOVIE_DB_API_KEY']
-    end
-  end
-
   def self.parse_data(response)
     JSON.parse(response.body, symbolize_names: true)
   end
@@ -45,11 +39,18 @@ class MovieApiService
   end
 
   def self.get_movie_details(movie_id)
-    response = conn.get("/3/movie/") do |movie|
-      movie.path += movie_id
+    response = conn.get("/3/movie/#{movie_id}") do |movie|
       movie.params[:append_to_response] = 'reviews,credits'
     end
 
     MovieObject.new(parse_data(response))
+  end
+
+  private
+
+  def self.conn
+    Faraday.new(url: "https://api.themoviedb.org") do |faraday|
+      faraday.params[:api_key] = ENV['MOVIE_DB_API_KEY']
+    end
   end
 end

@@ -9,7 +9,6 @@
   <%= form_with url: '/viewing-party/create', local: true do |f| %>
     <%= f.label :duration_of_party %>
     <%= f.text_field :duration_of_party, value: @movie.runtime %><br>
-    <%= require "pry"; binding.pry %>
     <%= f.label :date %>
     <%= f.date_field :date %><br>
 

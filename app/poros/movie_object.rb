@@ -1,3 +1,4 @@
+# require_relative 'review.rb'
 class MovieObject
   attr_reader :movie_id,
               :vote_average,
@@ -27,17 +28,17 @@ class MovieObject
     hours = @runtime / 60
     min = @runtime % 60
 
-    "#{hours} hr #{min} min"
+    if hours == 0
+      "#{min} min"
+    else
+      "#{hours} hr #{min} min"
+    end
   end
 
   def formatted_reviews
-    reviews = []
-
-    @reviews.each do |review|
-      reviews << {review_id: review[:id], author: review[:author], content: review[:content]}
+    @reviews.map do |review_data|
+      Review.new(review_data)
     end
-
-    reviews
   end
 
   def formatted_cast
@@ -54,16 +55,8 @@ class MovieObject
   end
 
   def get_genres
-    genres = ''
-    if @genres != []
-      @genres.each do |genre|
-        if genres == ''
-          genres = genre[:name]
-        else
-          genres += ", #{genre[:name]}"
-        end
-      end
-    end
-    genres
+    @genres.map do |genre|
+      genre[:name]
+    end.join(', ')
   end
 end

@@ -109,7 +109,6 @@ describe 'As an authenticated user' do
       fill_in :time, with: '2:00 PM'
       find_field("input#friend-#{@friend1.friend_id}").set(true)
       expect(page).to have_checked_field(:"input#friend-#{@friend1.friend_id}")
-      save_and_open_page
       click_button('Create Party')
 
       expect(page).to have_content("Date can't be blank")

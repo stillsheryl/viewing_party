@@ -1,8 +1,4 @@
 class MovieApiService
-  def self.parse_data(response)
-    JSON.parse(response.body, symbolize_names: true)
-  end
-
   def self.top_rated_movies
     page = 1
     top_movies = []
@@ -52,5 +48,9 @@ class MovieApiService
     Faraday.new(url: "https://api.themoviedb.org") do |faraday|
       faraday.params[:api_key] = ENV['MOVIE_DB_API_KEY']
     end
+  end
+
+  def self.parse_data(response)
+    JSON.parse(response.body, symbolize_names: true)
   end
 end

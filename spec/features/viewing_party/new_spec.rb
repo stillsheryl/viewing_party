@@ -8,14 +8,10 @@ describe 'As an authenticated user' do
         email: 'zach@email.com',
         password: 'password')
 
-    #Movie.create!(title: 'Yout name', api_id: 372058, runtime: 106)
-
       visit  '/'
       fill_in :email,	with: "zach@email.com"
       fill_in :password,	with: "password"
       click_button 'Sign In'
-
-      # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
 
       @user2 = User.create!(first_name: 'Angelina',
         last_name: 'Jolie',
@@ -57,15 +53,13 @@ describe 'As an authenticated user' do
         expect(page).to have_field(:duration_of_party)
         expect(page).to have_field(:date)
         expect(page).to have_field(:time)
-        # This may be weird... we'll see
+
         within(id="#friends") do
           expect(page).to have_unchecked_field(:"input#friend-#{@friend1.friend_id}")
-          # expect(page.find("friend")).to_not be_checked
         end
 
         within(id="#friends") do
           expect(page).to have_unchecked_field(:"input#friend-#{@friend2.friend_id}")
-          # expect(page.find("#input#friend-#{@friend2.friend_id}")).to_not be_checked
         end
 
         expect(page).to have_button('Create Party')
@@ -92,18 +86,14 @@ describe 'As an authenticated user' do
       expect(current_path).to eq('/dashboard')
       within '#Viewing_Parties' do
         expect(page).to have_content("#{@movie_details.title}")
-        # expect(page).to have_content("#{@movie_details.runtime}")
+
         expect(page).to have_content("December 1, 2020")
         expect(page).to have_content("2:00 PM")
         expect(page).to have_content('Hosting')
-
-        # expect(page).to have_content('Friends Invited')
-        # expect(page).to have_content('Angelina Jolie')
-        # expect(page).to_not have_content('Tom Myspace')
       end
     end
 
-    it "when I leave the date blank, I get an error that the date can't be blank, I see prepopulated data, and am on the same page" do
+    it "when I leave the date blank, I get an error that the date can't be blank" do
       expect(current_path).to eq('/viewing-party/new')
 
       fill_in :time, with: '2:00 PM'
@@ -113,36 +103,25 @@ describe 'As an authenticated user' do
 
       expect(page).to have_content("Date can't be blank")
       expect(page).to have_content("#{@movie_details.title}")
-      # expect(find_field(:date).value)to eq(nil)
-      # expect(find_field(:time).value)to eq('2:00 PM')
-      # expect(page).to have_field("input#friend-#{@friend1.id}", checked: true)
-      expect(page).to have_checked_field(:"input#friend-#{@friend1.friend_id}")
-      # expect(page).to have_field("input#friend-#{@friend2.id}", checked: false)
-      expect(page).to have_unchecked_field(:"input#friend-#{@friend2.friend_id}")
       expect(page).to have_button('Create Party')
     end
 
-    xit "when I leave the time blank, I get an error that the time can't be blank, I see prepopulated date, and am on the same page" do
+    it "when I leave the time blank, I get an error that the time can't be blank" do
       expect(current_path).to eq('/viewing-party/new')
 
       fill_in :date, with: '1/12/2020'
-      find(:css, "input#friend-#{@friend1.id}").set(true)
+      find_field("input#friend-#{@friend1.friend_id}").set(true)
       click_button('Create Party')
 
-      expect(current_path).to eq('/viewing-party/new')
       expect(page).to have_content("Time can't be blank")
-      expect(page).to have_content("#{@movie.title}")
-      # expect(find_field(:date).value)to eq(nil)
-      # expect(find_field(:time).value)to eq('2:00 PM')
-      expect(page).to have_field("input#friend-#{@friend1.id}", checked: true)
-      expect(page).to have_field("input#friend-#{@friend2.id}", checked: false)
+      expect(page).to have_content("#{@movie_details.title}")
       expect(page).to have_button('Create Party')
     end
 
-    xit "A viewing party can be created if the user has no friends" do
+    it "A viewing party can be created if the user has no friends" do
       user = User.create!(first_name: 'Mark',
         last_name: 'Zuckerberg',
-        email: 'zuck@email.com',
+        email: 'rando@email.com',
         password: 'facebookman')
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
@@ -156,8 +135,7 @@ describe 'As an authenticated user' do
 
       expect(current_path).to eq('/dashboard')
       within '#Viewing_Parties' do
-        expect(page).to have_content("#{@movie.title}")
-        expect(page).to have_content("#{@movie.runtime}")
+        expect(page).to have_content("#{@movie_details.title}")
         expect(page).to have_content("December 1, 2020")
         expect(page).to have_content("2:00 PM")
         expect(page).to have_content('Hosting')

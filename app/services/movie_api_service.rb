@@ -1,17 +1,17 @@
 class MovieApiService
   def self.top_rated_movies
-    page = 1
     top_movies = []
+    page_number = 0
 
     2.times do
-      response = conn.get("/3/movie/top_rated") do |movie|
-        movie.params[:page] = page
+      page_number += 1
+      response = conn.get('/3/movie/top_rated') do |movie|
+        movie.params[:page] = page_number
       end
 
-      movies = parse_data(response)
+      title_data = parse_data(response)
 
-      top_movies.concat(movies[:results])
-      page+=1
+      top_movies.concat(title_data[:results])
     end
     top_movies
   end
@@ -27,7 +27,6 @@ class MovieApiService
       end
 
       title_data = parse_data(response)
-
       titles << title_data[:results]
     end
 
@@ -45,7 +44,7 @@ class MovieApiService
   private
 
   def self.conn
-    Faraday.new(url: "https://api.themoviedb.org") do |faraday|
+    Faraday.new(url: 'https://api.themoviedb.org') do |faraday|
       faraday.params[:api_key] = ENV['MOVIE_DB_API_KEY']
     end
   end

@@ -46,32 +46,26 @@ describe 'As an authenticated user' do
     end
 
     it "I see a form with the following fields" do
-      # VCR.use_cassette('movie_details') do
-        expect(current_path).to eq('/viewing-party/new')
-        # Movie title goes here, may need to alter depending on how exactly to add this to test...
-        expect(page).to have_content("#{@movie_details.title}")
-        expect(page).to have_field(:duration_of_party)
-        expect(page).to have_field(:date)
-        expect(page).to have_field(:time)
+      expect(current_path).to eq('/viewing-party/new')
+      expect(page).to have_content("#{@movie_details.title}")
+      expect(page).to have_field(:duration_of_party)
+      expect(page).to have_field(:date)
+      expect(page).to have_field(:time)
 
-        within(id="#friends") do
-          expect(page).to have_unchecked_field(:"input#friend-#{@friend1.friend_id}")
-        end
+      within(id="#friends") do
+        expect(page).to have_unchecked_field(:"input#friend-#{@friend1.friend_id}")
+      end
 
-        within(id="#friends") do
-          expect(page).to have_unchecked_field(:"input#friend-#{@friend2.friend_id}")
-        end
+      within(id="#friends") do
+        expect(page).to have_unchecked_field(:"input#friend-#{@friend2.friend_id}")
+      end
 
-        expect(page).to have_button('Create Party')
-
-        # expect(page).to have_unchecked_field?("input#friend-#{@friend2.friend_id}")
-      # end
+      expect(page).to have_button('Create Party')
     end
 
     it "party duration is automatically populated with the movie's runtime in minutes" do
       expect(current_path).to eq('/viewing-party/new')
 
-      # Again, may be altered depending on how movie is called in this test
       expect(find_field(:duration_of_party).value).to eq("#{@movie_details.runtime}")
     end
 
@@ -130,7 +124,6 @@ describe 'As an authenticated user' do
 
       fill_in :date, with: '1/12/2020'
       fill_in :time, with: '2:00 PM'
-      # EXPECT PAGE TO NOT HAVE CHECKBOXES
       click_button('Create Party')
 
       expect(current_path).to eq('/dashboard')

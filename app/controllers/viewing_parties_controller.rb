@@ -16,15 +16,21 @@ class ViewingPartiesController < ApplicationController
 
     if party.save
       party.guests.create(user_id: current_user.id, attending: true)
-      current_user.friends.each do |friend|
-        if params[:"friend-#{friend.id}"] == '1'
-          party.guests.create(user_id: friend.id, attending: false)
-        end
-      end
+      add_friends(party)
       redirect_to '/dashboard'
     else
       flash[:error] = party.errors.full_messages.to_sentence
       render :new
+    end
+  end
+
+  private
+
+  def add_friends(party)
+    current_user.friends.each do |friend|
+      if params[:"friend-#{friend.id}"] == '1'
+        party.guests.create(user_id: friend.id, attending: false)
+      end
     end
   end
 end

@@ -4,12 +4,11 @@
 
 <section id="details">
   <p>
-    Movie Title  <%= @movie[:title] %>
+    Movie Title  <%= @movie.title %>
   </p>
   <%= form_with url: '/viewing-party/create', local: true do |f| %>
     <%= f.label :duration_of_party %>
     <%= f.text_field :duration_of_party, value: @movie.runtime %><br>
-    <%= require "pry"; binding.pry %>
     <%= f.label :date %>
     <%= f.date_field :date %><br>
 
@@ -23,7 +22,7 @@
       <% end %>
     </section>
 
-    <%= f.hidden_field :movie_id, value: @movie[:api_id] %>
+    <%= f.hidden_field :movie_id, value: @movie.api_id %>
 
     <%= f.submit 'Create Party' %>
   <% end %>

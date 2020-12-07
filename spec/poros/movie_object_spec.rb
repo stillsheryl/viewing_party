@@ -47,8 +47,11 @@ describe MovieObject do
   end
 
   it "formatted_reviews returnes the reviews in an array of hashes containing the id, author, and the content" do
-    expected = [{ author: 'Gotouge, Koyoharu', review_id: 256, content: 'content' }]
-    expect(@movie.formatted_reviews).to eq(expected)
+    assert_instance_of Array, @movie.formatted_reviews
+    assert_instance_of Review, @movie.formatted_reviews[0]
+    expect(@movie.formatted_reviews[0].author).to eq('Gotouge, Koyoharu')
+    expect(@movie.formatted_reviews[0].content).to eq('content')
+    expect(@movie.formatted_reviews[0].review_id).to eq(256)
   end
 
   it "get_genres returns an ampty string of genres is an empty array" do
@@ -58,7 +61,14 @@ describe MovieObject do
     expect(movie.get_genres).to eq('')
   end
 
-  it "runtime_convertion converts the integer of runtime into hours and minutes" do
+  it "runtime_conversion converts the integer of runtime into hours and minutes" do
     expect(@movie.runtime_conversion).to eq('1 hr 46 min')
+  end
+
+  it "runtime_conversion returns only the min if length does not make it to hours" do
+    @attrs[:runtime] = 46
+    movie = MovieObject.new(@attrs)
+
+    expect(movie.runtime_conversion).to eq('46 min')
   end
 end

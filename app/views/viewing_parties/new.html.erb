@@ -1,0 +1,29 @@
+<h2>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
+
+<h3>Viewing Party Details</h3>
+
+<section id="details">
+  <p>
+    Movie Title  <%= @movie.title %>
+  </p>
+  <%= form_with url: '/viewing-party/create', local: true do |f| %>
+    <%= f.label :duration_of_party %>
+    <%= f.text_field :duration_of_party, value: @movie.runtime %><br>
+    <%= f.label :date %>
+    <%= f.date_field :date %><br>
+
+    <%= f.label :time %>
+    <%= f.time_field :time %><br>
+
+    <section id='friends'>
+      <% current_user.friends.each do |friend| %>
+          <%= f.check_box :"input#friend-#{friend.id}"%>
+          <%= f.label :"#{friend.first_name + " " + friend.last_name}" %>
+      <% end %>
+    </section>
+
+    <%= f.hidden_field :movie_id, value: @movie.api_id %>
+
+    <%= f.submit 'Create Party' %>
+  <% end %>
+</section>

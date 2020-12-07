@@ -17,7 +17,7 @@
 
     <section id='friends'>
       <% current_user.friends.each do |friend| %>
-          <%= f.check_box :"input#friend-#{friend.id}"%>
+          <%= f.check_box :"friend-#{friend.id}"%>
           <%= f.label :"#{friend.first_name + " " + friend.last_name}" %>
       <% end %>
     </section>

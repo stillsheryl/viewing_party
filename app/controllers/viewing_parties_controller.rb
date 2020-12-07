@@ -17,7 +17,7 @@ class ViewingPartiesController < ApplicationController
     if party.save
       Guest.create(party_id: party[:id], user_id: current_user.id, attending: true)
       current_user.friends.each do |friend|
-        if params[:"input#friend-#{friend.id}"] == '1'
+        if params[:"friend-#{friend.id}"] == '1'
           Guest.create(party_id: party[:id], user_id: friend.id, attending: false)
         end
       end

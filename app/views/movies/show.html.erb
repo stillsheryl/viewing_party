@@ -1,13 +1,17 @@
 <h2>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
 
 <h1><%= @movie.title %></h1>
-<%= button_to 'Create viewing party for movie', '/viewing-party/new' %>
+
+<%= button_to 'Create viewing party for movie', '/viewing-party/new', method: :get,
+    params: { title: @movie.title,
+              runtime: @movie.runtime,
+              movie_id: @movie.movie_id}%>
 
 <section id='details'>
   <p>
     <b>Vote Average:</b> <%= @movie.vote_average %>
     <b>Runtime:</b> <%= @movie.runtime_conversion %>
-    <b>Genre(s):</b> <%= @movie.get_genres %>
+    <b>Genre(s): </b> <%= @movie.get_genres %>
   </p>
 </section>
 
@@ -34,9 +38,9 @@
 <% if @movie.reviews != []%>
   <section id='reviews'>
     <% @movie.formatted_reviews.each do |review| %>
-      <section id='review-<%= review[:review_id] %>'>
-        <b>Author: <%= review[:author] %></b><br>
-        <%= review[:content] %>
+      <section id='review-<%= review.review_id %>'>
+        <b>Author: <%= review.author %></b><br>
+        <%= review.content %>
       </section><br>
     <% end %>
   </section>

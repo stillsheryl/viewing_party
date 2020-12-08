@@ -4,6 +4,7 @@ describe Party, type: :model do
   describe "relationships" do
     it { should belong_to :movie }
     it { should belong_to :user }
+    it { should have_many :guests }
   end
 
   describe "validations" do
@@ -21,7 +22,7 @@ describe Party, type: :model do
       movie = Movie.create!(title: 'Avengers', api_id: 550)
       @party = Party.create!(user_id: current_user.id, movie_id: movie.id, date: '1/12/2020', time: '2 PM', duration: 220)
     end
-    
+
     it ".formatted_date" do
       expect(@party.formatted_date).to eq('December  1, 2020')
     end

@@ -1,5 +1,5 @@
 class Movie < ApplicationRecord
-  validates_presence_of :api_id, :title
+  validates :api_id, :title, presence: true
 
   has_many :parties
 end

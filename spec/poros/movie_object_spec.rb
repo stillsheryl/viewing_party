@@ -35,9 +35,9 @@ describe MovieObject do
     expect(@movie.review_count).to eq(1)
   end
 
-  it "get_genres returnes all the genres in a string" do
-    expect(@movie.get_genres).to eq('Action, Adventure')
-    expect(@movie.get_genres.class).to eq(String)
+  it "retrieve_genres returnes all the genres in a string" do
+    expect(@movie.retrieve_genres).to eq('Action, Adventure')
+    expect(@movie.retrieve_genres.class).to eq(String)
   end
 
   it "formatted_cast returns the actores and the character they played" do
@@ -54,11 +54,11 @@ describe MovieObject do
     expect(@movie.formatted_reviews[0].review_id).to eq(256)
   end
 
-  it "get_genres returns an ampty string of genres is an empty array" do
+  it "retrieve_genres returns an ampty string of genres is an empty array" do
     @attrs[:genres] = []
     movie = MovieObject.new(@attrs)
 
-    expect(movie.get_genres).to eq('')
+    expect(movie.retrieve_genres).to eq('')
   end
 
   it "runtime_conversion converts the integer of runtime into hours and minutes" do

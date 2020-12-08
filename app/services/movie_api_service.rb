@@ -41,7 +41,7 @@ class MovieApiService
     MovieObject.new(parse_data(response))
   end
 
-  private
+  private_class_method
 
   def self.conn
     Faraday.new(url: 'https://api.themoviedb.org') do |faraday|

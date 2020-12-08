@@ -17,13 +17,13 @@ describe User, type: :model do
     it { should validate_confirmation_of :password }
   end
 
-  # it 'sends an email' do
-  #   user = User.create!(first_name: 'Zach',
-  #                        last_name: 'Stearns',
-  #                            email: 'zach@email.com',
-  #                         password: 'password')
-  #
-  #   expect { user.welcome_email }
-  #     .to change { ActionMailer::Base.deliveries.count }.by(1)
-  # end
+  xit 'sends an email' do
+    user = User.create!(first_name: 'Zach',
+                         last_name: 'Stearns',
+                             email: 'zach@email.com',
+                          password: 'password')
+
+    expect { user.welcome_email }
+      .to change { ActionMailer::Base.deliveries.count }.by(1)
+  end
 end

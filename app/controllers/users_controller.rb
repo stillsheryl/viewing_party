@@ -8,16 +8,11 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
 
+      email_info = {
+        user: @user,
+      }
 
-      # email_info = {
-      # user: @user,
-      # friend: params[:friends_name],
-      # message: @advice.message
-    # }
-      # UserMailer.with(user: @user).welcome_email(email_info, @user.email).deliver_now
-
-      # UserMailer.welcome_email(email_info, @user.email).deliver_now
-
+      UserMailer.welcome_email(email_info, @user.email).deliver_now
 
       flash[:notice] = "Your account has successfully been created, #{@user.first_name}."
       redirect_to '/dashboard'

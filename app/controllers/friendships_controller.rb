@@ -6,20 +6,15 @@ class FriendshipsController < ApplicationController
     else
       Friendship.create(user_id: current_user.id, friend_id: friend.id)
 
-
-
       recipient = friend.email
 
       email_info = {
-      user: current_user,
-      friend: friend.first_name,
-      # message: @advice.message
-    }
+        user: current_user,
+        friend: friend.first_name,
+      }
 
-    FriendNotifierMailer.inform(email_info, recipient).deliver_now
-    flash[:notice] = "We let #{friend.first_name} know that you added them as a friend."
-    # redirect_to advice_url
-
+      FriendNotifierMailer.inform(email_info, recipient).deliver_now
+      flash[:notice] = "We let #{friend.first_name} know that you added them as a friend."
 
     end
     redirect_to '/dashboard'

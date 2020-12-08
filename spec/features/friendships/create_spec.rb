@@ -38,6 +38,8 @@ describe "As a registered user" do
       within '#Friends' do
         expect(page).to have_content('Angelina Jolie')
       end
+
+      expect(page).to have_content('We let Angelina know that you added them as a friend.')
     end
 
     it "filling in the search bar with an email that does not exist and clicking Add Friend, my friends list does not change and I get an error message saying that my friend cannot be found" do

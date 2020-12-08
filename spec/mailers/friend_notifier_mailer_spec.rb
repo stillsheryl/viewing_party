@@ -3,29 +3,25 @@ require 'rails_helper'
 RSpec.describe FriendNotifierMailer, type: :mailer do
 
   describe 'inform' do
-    sending_user = User.create(
-      first_name: 'Zach',
-      last_name: 'Stearns',
-      email: 'zach@email.com',
-      password: 'thebestjedi'
-    )
+    before :each do
+      sending_user = User.create!(
+        first_name: 'Zach',
+        last_name: 'Stearns',
+        email: 'zach@email.com',
+        password: 'thebestjedi'
+      )
 
-    email_info = {
-      user: sending_user,
-      friend: 'Angelina',
-      message: 'Work through your anger with exercise, and wear a mask'
-    }
+      @email_info = {
+        user: sending_user,
+        friend: 'Angelina',
+        message: 'Work through your anger with exercise, and wear a mask'
+      }
 
-    let(:mail) { FriendNotifierMailer.inform(email_info, 'angie@email.com') }
+    end
+
+    let(:mail) { FriendNotifierMailer.inform(@email_info, 'angie@email.com') }
 
     it 'renders the headers' do
-      # expect(ActionMailer::Base.deliveries.count).to eq(1)
-      # mail = ActionMailer::Base.deliveries.last
-
-      mail = mock(mail)
-      mail.should_receive(:deliver)
-      FriendNotifierMailer.should_receive(:inform).once.and_return(mail)
-
       expect(mail.subject).to eq('Zach has added you as a friend on ViewingParty!')
       expect(mail.to).to eq(['angie@email.com'])
       expect(mail.from).to eq(['no_reply@viewingparty.com'])

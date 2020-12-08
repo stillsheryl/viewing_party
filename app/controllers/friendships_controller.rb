@@ -1,4 +1,6 @@
 class FriendshipsController < ApplicationController
+  before_action :require_user
+
   def create
     friend = User.find_by(email: params[:email])
     if friend.nil? || current_user.friends.include?(friend)

@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_action :require_user
+
   def index
     if params[:movie_title] != ''
       @titles = MovieApiService.movie_search(params[:movie_title])

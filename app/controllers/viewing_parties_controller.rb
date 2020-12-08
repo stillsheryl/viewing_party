@@ -1,4 +1,6 @@
 class ViewingPartiesController < ApplicationController
+  before_action :require_user
+  
   def new
     @movie = Movie.find_by(api_id: params[:movie_id])
     @movie ||= Movie.create(title: params[:title], runtime: params[:runtime], api_id: params[:movie_id]) if @movie.nil?

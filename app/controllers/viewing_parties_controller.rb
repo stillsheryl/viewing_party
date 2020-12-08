@@ -1,9 +1,7 @@
 class ViewingPartiesController < ApplicationController
   def new
     @movie = Movie.find_by(api_id: params[:movie_id])
-    if @movie.nil?
-      @movie ||= Movie.create(title: params[:title],runtime: params[:runtime],api_id: params[:movie_id])
-    end
+    @movie ||= Movie.create(title: params[:title], runtime: params[:runtime], api_id: params[:movie_id]) if @movie.nil?
   end
 
   def create
@@ -13,7 +11,6 @@ class ViewingPartiesController < ApplicationController
                          date: params[:date],
                          time: params[:time],
                          duration: params[:duration_of_party])
-
     if party.save
       party.guests.create(user_id: current_user.id, attending: true)
       add_friends(party)

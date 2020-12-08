@@ -1,4 +1,3 @@
-# require_relative 'review.rb'
 class MovieObject
   attr_reader :movie_id,
               :vote_average,
@@ -28,7 +27,7 @@ class MovieObject
     hours = @runtime / 60
     min = @runtime % 60
 
-    if hours == 0
+    if hours.zero?
       "#{min} min"
     else
       "#{hours} hr #{min} min"
@@ -45,16 +44,14 @@ class MovieObject
     actor_roles = []
 
     @cast.each do |cast|
-      actor_roles << {cast_id: cast[:cast_id], role: "#{cast[:name]} as #{cast[:character]}"}
-      if actor_roles.count == 10
-        break
-      end
+      actor_roles << { cast_id: cast[:cast_id], role: "#{cast[:name]} as #{cast[:character]}" }
+      break if actor_roles.count == 10
     end
 
     actor_roles
   end
 
-  def get_genres
+  def retrieve_genres
     @genres.map do |genre|
       genre[:name]
     end.join(', ')

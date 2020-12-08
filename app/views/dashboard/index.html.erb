@@ -20,7 +20,7 @@
 </section>
 
 <section id='Viewing_Parties'>
-  <h2>Viewing_Parties</h2>
+  <h2>Viewing Parties</h2>
   <% current_user.parties.each do |party| %>
     <section id='party-<%= party.id %>'>
       <%= party.movie.title %><br>

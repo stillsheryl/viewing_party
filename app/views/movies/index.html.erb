@@ -8,7 +8,7 @@
 <% if !@titles.all?{|title| title.nil?} %>
   <% @titles.each do |title| %>
     <div class="movie-column">
-      <ul class="movie-results"><%= title[:original_title] %></ul>
+      <ul class="movie-results"><%= link_to title[:original_title], "/movies/#{title[:id]}" %></ul>
     </div>
 
     <div class="vote-column">

@@ -53,11 +53,11 @@ describe 'As an authenticated user' do
       expect(page).to have_field(:time)
 
       within(id="#friends") do
-        expect(page).to have_unchecked_field(:"input#friend-#{@friend1.friend_id}")
+        expect(page).to have_unchecked_field(:"friend-#{@friend1.friend_id}")
       end
 
       within(id="#friends") do
-        expect(page).to have_unchecked_field(:"input#friend-#{@friend2.friend_id}")
+        expect(page).to have_unchecked_field(:"friend-#{@friend2.friend_id}")
       end
 
       expect(page).to have_button('Create Party')
@@ -74,7 +74,7 @@ describe 'As an authenticated user' do
 
       fill_in :date, with: '1/12/2020'
       fill_in :time, with: '2:00 PM'
-      find_field("input#friend-#{@friend1.friend_id}").set(true)
+      find_field("friend-#{@friend1.friend_id}").set(true)
       click_button('Create Party')
 
       expect(current_path).to eq('/dashboard')
@@ -91,8 +91,8 @@ describe 'As an authenticated user' do
       expect(current_path).to eq('/viewing-party/new')
 
       fill_in :time, with: '2:00 PM'
-      find_field("input#friend-#{@friend1.friend_id}").set(true)
-      expect(page).to have_checked_field(:"input#friend-#{@friend1.friend_id}")
+      find_field("friend-#{@friend1.friend_id}").set(true)
+      expect(page).to have_checked_field(:"friend-#{@friend1.friend_id}")
       click_button('Create Party')
 
       expect(page).to have_content("Date can't be blank")
@@ -104,7 +104,7 @@ describe 'As an authenticated user' do
       expect(current_path).to eq('/viewing-party/new')
 
       fill_in :date, with: '1/12/2020'
-      find_field("input#friend-#{@friend1.friend_id}").set(true)
+      find_field("friend-#{@friend1.friend_id}").set(true)
       click_button('Create Party')
 
       expect(page).to have_content("Time can't be blank")

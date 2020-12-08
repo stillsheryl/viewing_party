@@ -3,6 +3,7 @@ class Party < ApplicationRecord
 
   belongs_to :user
   belongs_to :movie
+  has_many :guests
 
   def formatted_time
     self.time.strftime("%l:%M %p")

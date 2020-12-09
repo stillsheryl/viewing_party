@@ -16,14 +16,4 @@ describe User, type: :model do
     it { should validate_presence_of :password }
     it { should validate_confirmation_of :password }
   end
-
-  xit 'sends an email' do
-    user = User.new(first_name: 'Zach',
-                         last_name: 'Stearns',
-                             email: 'zach@email.com',
-                          password: 'password')
-
-    expect { UserMailer.welcome_email(user, user.email) }
-      .to change { ActionMailer::Base.deliveries.count }.by(1)
-  end
 end

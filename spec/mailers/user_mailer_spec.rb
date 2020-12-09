@@ -23,7 +23,14 @@ describe "welcome_email" do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Welcome to ViewingParty.com")
+      expect(mail.text_part.body.to_s).to include('Welcome to ViewingParty.com, Zach')
+      expect(mail.text_part.body.to_s).to include("You have successfully signed up to ViewingParty.com")
+
+      expect(mail.html_part.body.to_s).to include('Welcome to ViewingParty.com, Zach')
+      expect(mail.html_part.body.to_s).to include("You have successfully signed up to ViewingParty.com")
+
+      expect(mail.body.encoded).to include('Welcome to ViewingParty.com, Zach')
+      expect(mail.body.encoded).to include("You have successfully signed up to ViewingParty.com")
     end
   end
 end

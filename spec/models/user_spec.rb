@@ -18,12 +18,12 @@ describe User, type: :model do
   end
 
   xit 'sends an email' do
-    user = User.create!(first_name: 'Zach',
+    user = User.new(first_name: 'Zach',
                          last_name: 'Stearns',
                              email: 'zach@email.com',
                           password: 'password')
 
-    expect { user.welcome_email }
+    expect { UserMailer.welcome_email(user, user.email) }
       .to change { ActionMailer::Base.deliveries.count }.by(1)
   end
 end

@@ -28,4 +28,14 @@ describe 'As a user' do
       expect(page).to have_css('.vote-column', count: 40)
     end
   end
+
+  it "Page has the buttons for top, upcoming and movie search" do
+    VCR.use_cassette('top_rated_movies') do
+      visit movies_top_rated_path
+
+      expect(page).to have_button('Find Top Rated Movies')
+      expect(page).to have_button('Find Movies')
+      expect(page).to have_button('Upcoming Movies')
+    end
+  end
 end

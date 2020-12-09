@@ -7,6 +7,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+
+      email_info = {
+        user: @user,
+      }
+
+      UserMailer.welcome_email(email_info, @user.email).deliver_now
+
       flash[:notice] = "Your account has successfully been created, #{@user.first_name}."
       redirect_to dashboard_path
     else

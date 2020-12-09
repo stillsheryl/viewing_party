@@ -21,6 +21,10 @@ describe "As a authenticated user" do
     VCR.use_cassette('movie_no_genres_reviews') do
       @movie_no_genres_reviews_object = SearchFacade.movie_details(@movie_no_genres_reviews[:id].to_s)
     end
+
+    VCR.use_cassette('movie_no_image') do
+      @movie_no_image_object = SearchFacade.movie_details("715235")
+    end
   end
 
   it "I can click and visit the movie datails page" do
@@ -34,7 +38,7 @@ describe "As a authenticated user" do
     end
   end
 
-  it "I can see movie name vote average, runtime, genre's" do
+  it "I can see movie name, vote average, runtime, genre, and picture" do
     VCR.use_cassette('movie_details') do
       visit movie_show_path(@movie_details.movie_id)
 
@@ -46,6 +50,8 @@ describe "As a authenticated user" do
         expect(page).to have_content("Runtime: #{@movie_details.runtime_conversion}")
         expect(page).to have_content("Genre(s): #{@movie_details.retrieve_genres}")
       end
+
+      expect(page).to have_css('.image')
     end
   end
 
@@ -60,7 +66,7 @@ describe "As a authenticated user" do
     end
   end
 
-  it "I can see the movieies cast and their character" do
+  it "I can see the movies cast and their character" do
     VCR.use_cassette('movie_details') do
       visit movie_show_path(@movie_details.movie_id)
 
@@ -113,6 +119,14 @@ describe "As a authenticated user" do
       visit movie_show_path(@movie_no_genres_reviews_object.movie_id)
 
       expect(page).to_not have_css('#cast')
+    end
+  end
+
+  it "I cannot see a poster section css if there is no poster information" do
+    VCR.use_cassette('movie_no_image') do
+      visit movie_show_path(@movie_no_image_object.movie_id)
+
+      expect(page).to_not have_css('#image')
     end
   end
 end

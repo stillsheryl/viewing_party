@@ -1,0 +1,85 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/movie/715235?api_key=<DONT_EXPOSE_DATA>&append_to_response=reviews,credits
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 09 Dec 2020 21:38:34 GMT
+      Server:
+      - openresty
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, DELETE, OPTIONS
+      Access-Control-Expose-Headers:
+      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After,
+        Content-Length, Content-Range
+      Cache-Control:
+      - public, max-age=21600
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 5b64c1c93b9f50cfd3c4616abbff1e2d1725b7b9
+      X-Memc-Age:
+      - '7473'
+      X-Memc-Expires:
+      - '14127'
+      Etag:
+      - W/"c396afb308b6e232d1daf18c15dd7d42"
+      Last-Modified:
+      - Wed, 09 Dec 2020 21:38:34 GMT
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 48ea53c7edffa2cdbdc32f7d94966344.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - DEN50-C2
+      X-Amz-Cf-Id:
+      - GCybD19yDkcJ11djcCpBsfwMEd59x7vdZk5V5Ua8hAGVo8DLA5UWmw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"adult":false,"backdrop_path":null,"belongs_to_collection":null,"budget":0,"genres":[{"id":27,"name":"Horror"}],"homepage":"","id":715235,"imdb_id":"tt11093922","original_language":"en","original_title":"Rising","overview":"Rising
+        is a horror short film directed by Dylan Doornbos Hayes, starring Jackson
+        Robert Scott and Molly Gordon.","popularity":15.943,"poster_path":null,"production_companies":[{"id":135587,"logo_path":null,"name":"529
+        Entertainment","origin_country":""},{"id":135588,"logo_path":null,"name":"Oh
+        Rats Films","origin_country":""}],"production_countries":[{"iso_3166_1":"US","name":"United
+        States of America"}],"release_date":"2020-12-31","revenue":0,"runtime":0,"spoken_languages":[{"english_name":"English","iso_639_1":"en","name":"English"}],"status":"Post
+        Production","tagline":"","title":"Rising","video":false,"vote_average":0.0,"vote_count":0,"reviews":{"page":1,"results":[],"total_pages":0,"total_results":0},"credits":{"cast":[{"adult":false,"gender":2,"id":1649803,"known_for_department":"Acting","name":"Jackson
+        Robert Scott","original_name":"Jackson Robert Scott","popularity":3.623,"profile_path":"/9dop1KcQlXmsvswKzz08F1C5kYe.jpg","cast_id":1,"character":"Luke","credit_id":"5ee4caea0cb335001fbc4b16","order":1},{"adult":false,"gender":1,"id":1782117,"known_for_department":"Acting","name":"Molly
+        Gordon","original_name":"Molly Gordon","popularity":3.473,"profile_path":"/9aetjZLHPK1U9k1fI3svTZYytRL.jpg","cast_id":2,"character":"Michelle","credit_id":"5ee4caf6cb71b8001cb41922","order":2}],"crew":[{"adult":false,"gender":2,"id":995462,"known_for_department":"Editing","name":"Gregory
+        Plotkin","original_name":"Gregory Plotkin","popularity":0.6,"profile_path":"/sUGMMdWoLobZE4DuaXhLTOPVkby.jpg","credit_id":"5ee4cc48a217c0001fd0e8d8","department":"Editing","job":"Editor"},{"adult":false,"gender":2,"id":1543469,"known_for_department":"Production","name":"Chris
+        Grillot","original_name":"Chris Grillot","popularity":0.6,"profile_path":null,"credit_id":"5ee4cb6f0cb3350021bc14f4","department":"Writing","job":"Writer"},{"adult":false,"gender":2,"id":1764255,"known_for_department":"Acting","name":"Dylan
+        Doornbos Hayes","original_name":"Dylan Doornbos Hayes","popularity":0.6,"profile_path":null,"credit_id":"5ef9ce76cffeed0038046f35","department":"Directing","job":"Director"},{"adult":false,"gender":2,"id":2145017,"known_for_department":"Directing","name":"Kyle
+        Smithers","original_name":"Kyle Smithers","popularity":0.6,"profile_path":null,"credit_id":"5ee4cc23a217c00020d06c47","department":"Production","job":"Producer"},{"adult":false,"gender":1,"id":2633687,"known_for_department":"Camera","name":"Julia
+        Swain","original_name":"Julia Swain","popularity":0.6,"profile_path":null,"credit_id":"5ef7c679be7f3500349e9bb6","department":"Camera","job":"Director
+        of Photography"},{"adult":false,"gender":2,"id":2677048,"known_for_department":"Production","name":"Mike
+        Bayman","original_name":"Mike Bayman","popularity":0.6,"profile_path":null,"credit_id":"5ee4cc130cb3350020bbf972","department":"Production","job":"Producer"},{"adult":false,"gender":1,"id":2677049,"known_for_department":"Art","name":"Emma
+        Marie Jenkinson","original_name":"Emma Marie Jenkinson","popularity":0.6,"profile_path":null,"credit_id":"5ee4cc5e0cb3350020bbfa6e","department":"Art","job":"Production
+        Design"},{"adult":false,"gender":1,"id":2677051,"known_for_department":"Costume
+        & Make-Up","name":"Hannah Hayes","original_name":"Hannah Hayes","popularity":0.6,"profile_path":null,"credit_id":"5ee4cc6b97eab4001ee4ffe8","department":"Costume
+        & Make-Up","job":"Costume Designer"}]}}'
+  recorded_at: Wed, 09 Dec 2020 21:38:34 GMT
+recorded_with: VCR 6.0.0

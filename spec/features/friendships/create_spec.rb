@@ -93,5 +93,18 @@ describe "As a registered user" do
         expect(page).to have_content('Angelina Jolie', count: 1)
       end
     end
+
+    it 'sends an email when a friendship is created' do
+      Friendship.create!(user_id: @user1.id, friend_id: @user2.id)
+
+      info = {
+        user: @user1,
+        friend: @user2.first_name,
+      }
+      recipient = @user2.email
+
+      expect { FriendNotifierMailer.inform(info, recipient) }
+        .to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
   end
 end

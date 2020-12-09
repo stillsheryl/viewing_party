@@ -3,7 +3,7 @@ class MovieApiService
     top_movies = []
     page_number = 0
 
-    2.times do
+    until top_movies.count == 40
       page_number += 1
       response = conn.get('/3/movie/top_rated') do |movie|
         movie.params[:page] = page_number
@@ -26,7 +26,6 @@ class MovieApiService
         req.params[:query] = query
         req.params[:page] = page_number
       end
-
       title_data = parse_data(response)
       titles << title_data[:results]
     end

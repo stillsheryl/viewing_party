@@ -60,7 +60,7 @@ describe "As a authenticated user" do
     end
   end
 
-  it "I can see the movieies cast and their character" do
+  it "I can see the movies cast and their character" do
     VCR.use_cassette('movie_details') do
       visit "/movies/#{@movie_details.movie_id}"
 

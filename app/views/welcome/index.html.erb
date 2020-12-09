@@ -2,10 +2,12 @@
 
 <h3 id="description">Finally, a place where you can enjoy all your favorite movies with all your best friends!</h3>
 
-<%= form_with url: login_path, local: true do |f| %>
-  <%= f.text_field :email, placeholder: 'Enter Email' %> <br><br>
-  <%= f.password_field :password, placeholder: 'Enter Password' %> <br><br>
-  <%= f.submit "Sign In" %>
-<% end %> <br>
+<section class="container">
+  <%= form_with url: login_path, local: true do |f| %>
+    <%= f.text_field :email, placeholder: 'Enter Email' %> <br><br>
+    <%= f.password_field :password, placeholder: 'Enter Password' %> <br><br>
+    <%= f.submit "Sign In", class: "btn btn-outline-success" %>
+  <% end %> <br>
+</section>
 
-<%= link_to 'New to Viewing Party? Register Here!', '/registration' %>
+<%= link_to 'New to Viewing Party? Register Here!', '/registration', class: "btn btn-outline-primary" %>

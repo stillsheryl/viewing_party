@@ -8,7 +8,7 @@ describe 'As an authenticated user' do
         email: 'zach@email.com',
         password: 'password')
 
-      visit  '/'
+      visit root_path
       fill_in :email,	with: "zach@email.com"
       fill_in :password,	with: "password"
       click_button 'Sign In'
@@ -46,7 +46,7 @@ describe 'As an authenticated user' do
     end
 
     it "I see a form with the following fields" do
-      expect(current_path).to eq('/viewing-party/new')
+      expect(current_path).to eq(viewing_party_new_path)
       expect(page).to have_content("#{@movie_details.title}")
       expect(page).to have_field(:duration_of_party)
       expect(page).to have_field(:date)
@@ -64,20 +64,20 @@ describe 'As an authenticated user' do
     end
 
     it "party duration is automatically populated with the movie's runtime in minutes" do
-      expect(current_path).to eq('/viewing-party/new')
+      expect(current_path).to eq(viewing_party_new_path)
 
       expect(find_field(:duration_of_party).value).to eq("#{@movie_details.runtime}")
     end
 
     it "when I fill in the form with valid information and create the viewing party, I am redirected to the dashboard where I see the new event" do
-      expect(current_path).to eq('/viewing-party/new')
+      expect(current_path).to eq(viewing_party_new_path)
 
       fill_in :date, with: '1/12/2020'
       fill_in :time, with: '2:00 PM'
       find_field("friend-#{@friend1.friend_id}").set(true)
       click_button('Create Party')
 
-      expect(current_path).to eq('/dashboard')
+      expect(current_path).to eq(dashboard_path)
       within '#Viewing_Parties' do
         expect(page).to have_content("#{@movie_details.title}")
 
@@ -88,7 +88,7 @@ describe 'As an authenticated user' do
     end
 
     it "when I leave the date blank, I get an error that the date can't be blank" do
-      expect(current_path).to eq('/viewing-party/new')
+      expect(current_path).to eq(viewing_party_new_path)
 
       fill_in :time, with: '2:00 PM'
       find_field("friend-#{@friend1.friend_id}").set(true)
@@ -101,7 +101,7 @@ describe 'As an authenticated user' do
     end
 
     it "when I leave the time blank, I get an error that the time can't be blank" do
-      expect(current_path).to eq('/viewing-party/new')
+      expect(current_path).to eq(viewing_party_new_path)
 
       fill_in :date, with: '1/12/2020'
       find_field("friend-#{@friend1.friend_id}").set(true)
@@ -120,13 +120,13 @@ describe 'As an authenticated user' do
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      expect(current_path).to eq('/viewing-party/new')
+      expect(current_path).to eq(viewing_party_new_path)
 
       fill_in :date, with: '1/12/2020'
       fill_in :time, with: '2:00 PM'
       click_button('Create Party')
 
-      expect(current_path).to eq('/dashboard')
+      expect(current_path).to eq(dashboard_path)
       within '#Viewing_Parties' do
         expect(page).to have_content("#{@movie_details.title}")
         expect(page).to have_content("December 1, 2020")

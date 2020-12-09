@@ -5,7 +5,7 @@ describe "As a visitor" do
     before(:each) do
       @user = User.create!(first_name: 'Zach',
         last_name: 'Stearns',
-        email: 'zach@email.com', 
+        email: 'zach@email.com',
         password: 'password')
     end
 
@@ -18,7 +18,7 @@ describe "As a visitor" do
         expect(page).to have_content('Finally, a place where you can enjoy all your favorite movies with all your best friends!')
       end
     end
-    
+
     it "I see fields to login" do
       visit root_path
 
@@ -26,7 +26,7 @@ describe "As a visitor" do
       expect(page).to  have_field(:password)
       expect(page).to  have_button('Sign In')
     end
-    
+
     it "I see a link to register as a new user" do
       visit root_path
 
@@ -35,9 +35,9 @@ describe "As a visitor" do
 
     it "When I click the register new user link, I am taken to the register new user page" do
       visit root_path
-      
+
       click_link('New to Viewing Party? Register Here!')
-      expect(current_path).to eq("/registration")
+      expect(current_path).to eq(registration_path)
     end
   end
 end

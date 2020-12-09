@@ -16,7 +16,7 @@ describe "As a visitor" do
       fill_in :password,	with: "#{@user.password}"
       click_button 'Sign In'
 
-      expect(current_path).to eq('/dashboard')
+      expect(current_path).to eq(dashboard_path)
       expect(page).to have_content('Login Successful!')
     end
 

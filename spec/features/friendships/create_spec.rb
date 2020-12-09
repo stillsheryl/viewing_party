@@ -40,6 +40,8 @@ describe "As a registered user" do
       end
 
       expect(page).to have_content('We let Angelina know that you added them as a friend.')
+
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
     it "filling in the search bar with an email that does not exist and clicking Add Friend, my friends list does not change and I get an error message saying that my friend cannot be found" do
@@ -92,19 +94,6 @@ describe "As a registered user" do
       within '#Friends' do
         expect(page).to have_content('Angelina Jolie', count: 1)
       end
-    end
-
-    it 'sends an email when a friendship is created' do
-      Friendship.create!(user_id: @user1.id, friend_id: @user2.id)
-
-      info = {
-        user: @user1,
-        friend: @user2.first_name,
-      }
-      recipient = @user2.email
-
-      expect { FriendNotifierMailer.inform(info, recipient) }
-        .to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 end

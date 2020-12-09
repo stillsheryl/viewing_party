@@ -12,35 +12,43 @@ describe "As a registered user" do
     end
 
     it "When I make an entry in the search bar, I see my case-insensitive movie title results and the voting average listed on the movies index page" do
-      
+
       VCR.use_cassette('movie_search') do
-        visit '/discover'
-  
+        visit discover_path
+
         fill_in :movie_title,	with: "star"
         click_button 'Find Movies'
-        expect(current_path).to eq('/movies')
-  
+        expect(current_path).to eq(movies_path)
+
         within all('.movie-results')[0] do
           expect(page).to have_content(/star/i)
         end
-  
+
         within all('.movie-results')[22] do
           expect(page).to have_content(/star/i)
         end
-  
+
         within all('.movie-results')[39] do
           expect(page).to have_content(/star/i)
         end
       end
     end
 
+    it "I can return less than 40 results", :vcr do
+        visit discover_path
+        fill_in :movie_title, with: 'forrest gump'
+        click_button 'Find Movies'
+
+        expect(page).to have_css('.movie-column', count: 2)
+    end
+
     it "I see no more than 40 results" do
       VCR.use_cassette('movie_search') do
-        visit '/discover'
+        visit discover_path
 
         fill_in :movie_title,	with: "star"
         click_button 'Find Movies'
-        expect(current_path).to eq('/movies')
+        expect(current_path).to eq(movies_path)
 
         expect(page).to have_css('.movie-column', count: 40)
         expect(page).to have_css('.vote-column', count: 40)
@@ -48,22 +56,22 @@ describe "As a registered user" do
     end
 
     it "I enter a space, so no results match my search, and I see a message saying so", :vcr do
-      visit '/discover'
+      visit discover_path
 
       fill_in :movie_title, with: ' '
       click_button 'Find Movies'
 
-      expect(current_path).to eq('/movies')
+      expect(current_path).to eq(movies_path)
       expect(page).to have_content('No results match your search!')
     end
 
     it "testing no match again", :vcr do
-      visit '/discover'
+      visit discover_path
 
       fill_in :movie_title, with: 'avfawrgba'
       click_button 'Find Movies'
 
-      expect(current_path).to eq('/movies')
+      expect(current_path).to eq(movies_path)
       expect(page).to have_content('No results match your search!')
     end
   end

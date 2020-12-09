@@ -17,13 +17,13 @@ describe "As a registered user" do
     end
 
     it "I see a search bar to add friends" do
-      visit '/dashboard'
+      visit dashboard_path
 
       expect(page).to have_field(:email)
     end
 
     it "filling in the search bar with an existing email address and clicking Add Friend, that friend gets added to my friends list" do
-      visit '/dashboard'
+      visit dashboard_path
 
       within '#Friends' do
         expect(page).to have_content('You currently have no friends')
@@ -33,15 +33,19 @@ describe "As a registered user" do
       click_button('Add Friend')
 
       @user1.reload
-      expect(current_path).to eq('/dashboard')
+      expect(current_path).to eq(dashboard_path)
 
       within '#Friends' do
         expect(page).to have_content('Angelina Jolie')
       end
+
+      expect(page).to have_content('We let Angelina know that you added them as a friend.')
+
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
     it "filling in the search bar with an email that does not exist and clicking Add Friend, my friends list does not change and I get an error message saying that my friend cannot be found" do
-      visit '/dashboard'
+      visit dashboard_path
 
       within '#Friends' do
         expect(page).to have_content('You currently have no friends')
@@ -50,7 +54,7 @@ describe "As a registered user" do
       fill_in :email, with: 'billyjoehenrybob@email.com'
       click_button('Add Friend')
 
-      expect(current_path).to eq('/dashboard')
+      expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("I'm sorry your friend cannot not found.")
 
       within '#Friends' do
@@ -59,7 +63,7 @@ describe "As a registered user" do
     end
 
     it "Clicking the Add Friend button without entering anything returns an error" do
-      visit '/dashboard'
+      visit dashboard_path
 
       click_button('Add Friend')
 
@@ -67,7 +71,7 @@ describe "As a registered user" do
     end
 
     it "Entering an email of a friend of whom you are already friends with notifies you that you're friends and does not duplicate that person in your friends list" do
-      visit '/dashboard'
+      visit dashboard_path
 
       within '#Friends' do
         expect(page).to have_content('You currently have no friends')
@@ -76,7 +80,7 @@ describe "As a registered user" do
       fill_in :email, with: 'angie@email.com'
       click_button('Add Friend')
 
-      expect(current_path).to eq('/dashboard')
+      expect(current_path).to eq(dashboard_path)
       within '#Friends' do
         expect(page).to have_content('Angelina Jolie')
       end
@@ -84,7 +88,7 @@ describe "As a registered user" do
       fill_in :email, with: 'angie@email.com'
       click_button('Add Friend')
 
-      expect(current_path).to eq('/dashboard')
+      expect(current_path).to eq(dashboard_path)
       expect(page).to have_content('You are already friends.')
 
       within '#Friends' do

@@ -4,39 +4,43 @@ describe "As a authenticated user" do
   before :each do
     User.create(email: 'test@gmail.com', password: 'test', first_name: 'Alex', last_name: 'Rivero')
 
-    visit  '/'
+    visit root_path
     fill_in :email,	with: "test@gmail.com"
     fill_in :password,	with: "test"
     click_button 'Sign In'
 
     VCR.use_cassette('top_rated_movies') do
       @movie = MovieApiService.top_rated_movies[8]
-      @movie_no_genres_reviews = MovieApiService.top_rated_movies[0]
+      @movie_no_genres_reviews = SearchFacade.top_rated_movies[0]
     end
 
     VCR.use_cassette('movie_details') do
-      @movie_details = MovieApiService.get_movie_details(@movie[:id].to_s)
+      @movie_details = SearchFacade.movie_details(@movie[:id].to_s)
     end
 
     VCR.use_cassette('movie_no_genres_reviews') do
-      @movie_no_genres_reviews_object = MovieApiService.get_movie_details(@movie_no_genres_reviews[:id].to_s)
+      @movie_no_genres_reviews_object = SearchFacade.movie_details(@movie_no_genres_reviews[:id].to_s)
+    end
+
+    VCR.use_cassette('movie_no_image') do
+      @movie_no_image_object = SearchFacade.movie_details("715235")
     end
   end
 
   it "I can click and visit the movie datails page" do
     VCR.use_cassette('top_rated_movies') do
-      visit '/movies/top_rated'
+      visit movies_top_rated_path
 
       VCR.use_cassette('movie_details') do
         click_link @movie[:title]
-        expect(current_path).to eq("/movies/#{@movie[:id]}")
+        expect(current_path).to eq(movie_show_path(@movie[:id]))
       end
     end
   end
 
-  it "I can see movie name vote average, runtime, genre's" do
+  it "I can see movie name, vote average, runtime, genre, and picture" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       expect(page).to have_content('Your Name.')
       expect(page).to have_button('Create viewing party for movie')
@@ -46,12 +50,14 @@ describe "As a authenticated user" do
         expect(page).to have_content("Runtime: #{@movie_details.runtime_conversion}")
         expect(page).to have_content("Genre(s): #{@movie_details.retrieve_genres}")
       end
+
+      expect(page).to have_css('.image')
     end
   end
 
   it "I can see the movie summary" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       within('#summary') do
         expect(page).to have_content('Summary')
@@ -60,9 +66,9 @@ describe "As a authenticated user" do
     end
   end
 
-  it "I can see the movieies cast and their character" do
+  it "I can see the movies cast and their character" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       expect(page).to have_content('Cast')
 
@@ -81,7 +87,7 @@ describe "As a authenticated user" do
 
   it "I can see the movie summary" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       expect(page).to have_content("#{@movie_details.review_count} Reviews")
 
@@ -102,7 +108,7 @@ describe "As a authenticated user" do
 
   it "I cannot see a reviews section css if there are no reviews" do
     VCR.use_cassette('movie_no_genres_reviews') do
-      visit "/movies/#{@movie_no_genres_reviews_object.movie_id}"
+      visit movie_show_path(@movie_no_genres_reviews_object.movie_id)
 
       expect(page).to_not have_css('#reviews')
     end
@@ -110,9 +116,17 @@ describe "As a authenticated user" do
 
   it "I cannot see a cast section css if there are no cast information" do
     VCR.use_cassette('movie_no_genres_reviews') do
-      visit "/movies/#{@movie_no_genres_reviews_object.movie_id}"
+      visit movie_show_path(@movie_no_genres_reviews_object.movie_id)
 
       expect(page).to_not have_css('#cast')
+    end
+  end
+
+  it "I cannot see a poster section css if there is no poster information" do
+    VCR.use_cassette('movie_no_image') do
+      visit movie_show_path(@movie_no_image_object.movie_id)
+
+      expect(page).to_not have_css('#image')
     end
   end
 end

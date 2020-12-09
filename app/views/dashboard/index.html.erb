@@ -1,11 +1,11 @@
 <h1>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h1>
 
-<%= button_to 'Discover Movies', '/discover', method: 'get' %>
+<%= button_to 'Discover Movies', discover_path, method: 'get' %>
 
 <section id='Friends'>
   <h2>Friends</h2>
 
-  <%= form_with url: '/friendships/new', method: 'post', local: true do |f| %>
+  <%= form_with url: friendships_new_path, method: 'post', local: true do |f| %>
     <%= f.text_field :email , placeholder: "Friend's Email"%>
     <%= f.submit "Add Friend" %>
   <% end %>

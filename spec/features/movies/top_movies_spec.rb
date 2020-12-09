@@ -4,7 +4,7 @@ describe 'As a user' do
   before :each do
     User.create(email: 'test@gmail.com', password: 'test', first_name: 'Alex', last_name: 'Rivero')
 
-    visit  '/'
+    visit root_path
     fill_in :email,	with: "test@gmail.com"
     fill_in :password,	with: "test"
     click_button 'Sign In'
@@ -16,13 +16,13 @@ describe 'As a user' do
 
       click_button 'Find Top Rated Movies'
 
-      expect(current_path).to eq('/movies/top_rated')
+      expect(current_path).to eq(movies_top_rated_path)
     end
   end
 
   it "There are 40 top rated movies on the page" do
     VCR.use_cassette('top_rated_movies') do
-      visit '/movies/top_rated'
+      visit movies_top_rated_path
 
       expect(page).to have_css('.movie-column', count: 40)
       expect(page).to have_css('.vote-column', count: 40)

@@ -4,7 +4,7 @@ describe 'As a user' do
   before :each do
     User.create(email: 'test@gmail.com', password: 'test', first_name: 'Alex', last_name: 'Rivero')
 
-    visit  '/'
+    visit root_path
     fill_in :email,	with: "test@gmail.com"
     fill_in :password,	with: "test"
     click_button 'Sign In'
@@ -15,7 +15,7 @@ describe 'As a user' do
   end
 
   it "I am in the dashboard link" do
-    expect(current_path).to eq('/dashboard')
+    expect(current_path).to eq(dashboard_path)
   end
 
   it "Has clickable button to Discover movies" do
@@ -42,7 +42,7 @@ describe 'As a user' do
   it "Section show current parties and their info for user if any" do
     Guest.create(party_id: @party.id, user_id: @current_user.id, attending: true)
 
-    visit '/dashboard'
+    visit dashboard_path
 
     within id="#party-#{@party.id}" do
       expect(page).to have_content('Avengers')
@@ -56,7 +56,7 @@ describe 'As a user' do
     click_link 'Logout'
     User.create(email: 'test@test.com', password: 'testing', first_name: 'James', last_name: 'Morgan')
 
-    visit  '/'
+    visit root_path
     fill_in :email,	with: "test@test.com"
     fill_in :password,	with: "testing"
     click_button 'Sign In'
@@ -64,7 +64,7 @@ describe 'As a user' do
     current_user = User.last
     Guest.create(party_id: @party.id, user_id: current_user.id, attending: true)
 
-    visit '/dashboard'
+    visit dashboard_path
 
     within id="#party-#{@party.id}" do
       expect(page).to have_content('Avengers')

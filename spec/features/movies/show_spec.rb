@@ -4,7 +4,7 @@ describe "As a authenticated user" do
   before :each do
     User.create(email: 'test@gmail.com', password: 'test', first_name: 'Alex', last_name: 'Rivero')
 
-    visit  '/'
+    visit root_path
     fill_in :email,	with: "test@gmail.com"
     fill_in :password,	with: "test"
     click_button 'Sign In'
@@ -25,7 +25,7 @@ describe "As a authenticated user" do
 
   it "I can click and visit the movie datails page" do
     VCR.use_cassette('top_rated_movies') do
-      visit '/movies/top_rated'
+      visit movies_top_rated_path
 
       VCR.use_cassette('movie_details') do
         click_link @movie[:title]

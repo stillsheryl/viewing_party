@@ -4,7 +4,7 @@ describe 'As a user' do
   before :each do
     User.create(email: 'test@gmail.com', password: 'test', first_name: 'Alex', last_name: 'Rivero')
 
-    visit  '/'
+    visit root_path
     fill_in :email,	with: "test@gmail.com"
     fill_in :password,	with: "test"
     click_button 'Sign In'
@@ -22,7 +22,7 @@ describe 'As a user' do
   it "if I try to click on the search button without entering anything, I stay on the discover page" do
     visit '/discover'
     user = User.last
-    
+
     click_button('Find Movies')
 
     expect(current_path).to eq('/discover')

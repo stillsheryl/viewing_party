@@ -18,7 +18,7 @@ describe "As a registered user" do
   
         fill_in :movie_title,	with: "star"
         click_button 'Find Movies'
-        expect(current_path).to eq('/movies')
+        expect(current_path).to eq(movies_path)
   
         within all('.movie-results')[0] do
           expect(page).to have_content(/star/i)
@@ -40,7 +40,7 @@ describe "As a registered user" do
 
         fill_in :movie_title,	with: "star"
         click_button 'Find Movies'
-        expect(current_path).to eq('/movies')
+        expect(current_path).to eq(movies_path)
 
         expect(page).to have_css('.movie-column', count: 40)
         expect(page).to have_css('.vote-column', count: 40)
@@ -53,7 +53,7 @@ describe "As a registered user" do
       fill_in :movie_title, with: ' '
       click_button 'Find Movies'
 
-      expect(current_path).to eq('/movies')
+      expect(current_path).to eq(movies_path)
       expect(page).to have_content('No results match your search!')
     end
 
@@ -63,7 +63,7 @@ describe "As a registered user" do
       fill_in :movie_title, with: 'avfawrgba'
       click_button 'Find Movies'
 
-      expect(current_path).to eq('/movies')
+      expect(current_path).to eq(movies_path)
       expect(page).to have_content('No results match your search!')
     end
   end

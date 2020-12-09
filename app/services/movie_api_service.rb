@@ -26,7 +26,6 @@ class MovieApiService
         req.params[:query] = query
         req.params[:page] = page_number
       end
-
       title_data = parse_data(response)
       titles << title_data[:results]
     end

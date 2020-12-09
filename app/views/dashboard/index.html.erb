@@ -5,7 +5,7 @@
 <section id='Friends'>
   <h2>Friends</h2>
 
-  <%= form_with url: '/friendships/new', method: 'post', local: true do |f| %>
+  <%= form_with url: friendships_new_path, method: 'post', local: true do |f| %>
     <%= f.text_field :email , placeholder: "Friend's Email"%>
     <%= f.submit "Add Friend" %>
   <% end %>

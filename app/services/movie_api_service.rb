@@ -22,8 +22,9 @@ class MovieApiService
 
     2.times do
       page_number += 1
-      response = conn.get("/3/search/movie?&page=#{page_number}") do |req|
+      response = conn.get("/3/search/movie") do |req|
         req.params[:query] = query
+        req.params[:page] = page_number
       end
 
       title_data = parse_data(response)

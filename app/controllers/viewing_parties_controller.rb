@@ -1,4 +1,6 @@
 class ViewingPartiesController < ApplicationController
+  before_action :require_user
+
   def new
     @movie = Movie.find_by(api_id: params[:movie_id])
     @movie ||= Movie.create(title: params[:title], runtime: params[:runtime], api_id: params[:movie_id]) if @movie.nil?
@@ -25,9 +27,7 @@ class ViewingPartiesController < ApplicationController
 
   def add_friends(party)
     current_user.friends.each do |friend|
-      if params[:"friend-#{friend.id}"] == '1'
-        party.guests.create(user_id: friend.id, attending: false)
-      end
+      party.guests.create(user_id: friend.id, attending: false) if params[:"friend-#{friend.id}"] == '1'
     end
   end
 end

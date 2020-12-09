@@ -10,7 +10,7 @@ describe "As a registered user" do
 
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit '/dashboard'
+      visit dashboard_path
 
       click_link "Logout"
       expect(current_path).to eq(root_path)

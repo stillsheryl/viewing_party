@@ -16,7 +16,7 @@ class ViewingPartiesController < ApplicationController
     if party.save
       party.guests.create(user_id: current_user.id, attending: true)
       add_friends(party)
-      redirect_to '/dashboard'
+      redirect_to dashboard_path
     else
       flash[:error] = party.errors.full_messages.to_sentence
       render :new

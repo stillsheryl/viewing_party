@@ -6,9 +6,9 @@
   <p>
     Movie Title  <%= @movie.title %>
   </p>
-  <%= form_with url: '/viewing-party/create', local: true do |f| %>
+  <%= form_with url: viewing_party_create_path, local: true do |f| %>
     <%= f.label :duration_of_party %>
-    <%= f.text_field :duration_of_party, value: @movie.runtime %><br>
+    <%= f.number_field :duration_of_party, value: @movie.runtime, min: @movie.runtime %><br>
     <%= f.label :date %>
     <%= f.date_field :date %><br>
 

@@ -22,8 +22,9 @@ class MovieApiService
 
     2.times do
       page_number += 1
-      response = conn.get("/3/search/movie?&page=#{page_number}") do |req|
+      response = conn.get("/3/search/movie") do |req|
         req.params[:query] = query
+        req.params[:page] = page_number
       end
 
       title_data = parse_data(response)
@@ -37,8 +38,7 @@ class MovieApiService
     response = conn.get("/3/movie/#{movie_id}") do |movie|
       movie.params[:append_to_response] = 'reviews,credits'
     end
-
-    MovieObject.new(parse_data(response))
+    parse_data(response)
   end
 
   private_class_method

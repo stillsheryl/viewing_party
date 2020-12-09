@@ -8,7 +8,7 @@ class FriendshipsController < ApplicationController
     else
       Friendship.create(user_id: current_user.id, friend_id: friend.id)
     end
-    redirect_to '/dashboard'
+    redirect_to dashboard_path
   end
 
   def error_message(friend)

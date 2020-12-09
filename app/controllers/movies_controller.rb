@@ -3,18 +3,18 @@ class MoviesController < ApplicationController
 
   def index
     if params[:movie_title] != ''
-      @titles = MovieApiService.movie_search(params[:movie_title])
+      @titles = SearchFacade.movie_search(params[:movie_title])
     else
       flash[:error] = 'Search field cannot be blank'
-      redirect_to '/discover'
+      redirect_to discover_path
     end
   end
 
   def show
-    @movie = MovieApiService.get_movie_details(params[:movie_id])
+    @movie = SearchFacade.movie_details(params[:movie_id])
   end
 
   def top_rated
-    @top_movies = MovieApiService.top_rated_movies
+    @top_movies = SearchFacade.top_rated_movies
   end
 end

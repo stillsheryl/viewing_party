@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if !user.nil? && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = 'Login Successful!'
-      redirect_to '/dashboard'
+      redirect_to dashboard_path
     else
       error_message
     end

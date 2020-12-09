@@ -32,15 +32,15 @@ describe 'As an authenticated user' do
       @friend2 = Friendship.create!(user_id: @user1.id, friend_id: @user3.id)
 
       VCR.use_cassette('top_rated_movies') do
-        @movie = MovieApiService.top_rated_movies[8]
+        @movie = SearchFacade.top_rated_movies[8]
       end
 
       VCR.use_cassette('movie_details') do
-        @movie_details = MovieApiService.get_movie_details(@movie[:id].to_s)
+        @movie_details = SearchFacade.movie_details(@movie[:id].to_s)
       end
 
       VCR.use_cassette('movie_details') do
-        visit "/movies/#{@movie[:id]}"
+        visit movie_show_path(@movie[:id])
         click_button 'Create viewing party for movie'
       end
     end

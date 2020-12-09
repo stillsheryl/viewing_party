@@ -8,7 +8,7 @@ describe "As a visitor" do
     end
 
     it "I try to visit the discover page" do
-      visit '/discover'
+      visit discover_path
       expect(page).to have_content("The page you were looking for doesn't exist.")
     end
 
@@ -23,7 +23,7 @@ describe "As a visitor" do
     end
 
     it "I try to visit the movies show page" do
-      visit '/movies/13'
+      visit movie_show_path("13")
       expect(page).to have_content("The page you were looking for doesn't exist.")
     end
 

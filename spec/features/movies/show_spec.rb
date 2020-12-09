@@ -11,15 +11,15 @@ describe "As a authenticated user" do
 
     VCR.use_cassette('top_rated_movies') do
       @movie = MovieApiService.top_rated_movies[8]
-      @movie_no_genres_reviews = MovieApiService.top_rated_movies[0]
+      @movie_no_genres_reviews = SearchFacade.top_rated_movies[0]
     end
 
     VCR.use_cassette('movie_details') do
-      @movie_details = MovieApiService.get_movie_details(@movie[:id].to_s)
+      @movie_details = SearchFacade.movie_details(@movie[:id].to_s)
     end
 
     VCR.use_cassette('movie_no_genres_reviews') do
-      @movie_no_genres_reviews_object = MovieApiService.get_movie_details(@movie_no_genres_reviews[:id].to_s)
+      @movie_no_genres_reviews_object = SearchFacade.movie_details(@movie_no_genres_reviews[:id].to_s)
     end
   end
 
@@ -29,14 +29,14 @@ describe "As a authenticated user" do
 
       VCR.use_cassette('movie_details') do
         click_link @movie[:title]
-        expect(current_path).to eq("/movies/#{@movie[:id]}")
+        expect(current_path).to eq(movie_show_path(@movie[:id]))
       end
     end
   end
 
   it "I can see movie name vote average, runtime, genre's" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       expect(page).to have_content('Your Name.')
       expect(page).to have_button('Create viewing party for movie')
@@ -51,7 +51,7 @@ describe "As a authenticated user" do
 
   it "I can see the movie summary" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       within('#summary') do
         expect(page).to have_content('Summary')
@@ -62,7 +62,7 @@ describe "As a authenticated user" do
 
   it "I can see the movieies cast and their character" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       expect(page).to have_content('Cast')
 
@@ -81,7 +81,7 @@ describe "As a authenticated user" do
 
   it "I can see the movie summary" do
     VCR.use_cassette('movie_details') do
-      visit "/movies/#{@movie_details.movie_id}"
+      visit movie_show_path(@movie_details.movie_id)
 
       expect(page).to have_content("#{@movie_details.review_count} Reviews")
 
@@ -102,7 +102,7 @@ describe "As a authenticated user" do
 
   it "I cannot see a reviews section css if there are no reviews" do
     VCR.use_cassette('movie_no_genres_reviews') do
-      visit "/movies/#{@movie_no_genres_reviews_object.movie_id}"
+      visit movie_show_path(@movie_no_genres_reviews_object.movie_id)
 
       expect(page).to_not have_css('#reviews')
     end
@@ -110,7 +110,7 @@ describe "As a authenticated user" do
 
   it "I cannot see a cast section css if there are no cast information" do
     VCR.use_cassette('movie_no_genres_reviews') do
-      visit "/movies/#{@movie_no_genres_reviews_object.movie_id}"
+      visit movie_show_path(@movie_no_genres_reviews_object.movie_id)
 
       expect(page).to_not have_css('#cast')
     end

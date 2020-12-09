@@ -12,7 +12,7 @@ describe 'As a user' do
 
   it "When i click on Find Top Movies in discover I am taken to the top 40 movies link" do
     VCR.use_cassette('top_rated_movies') do
-      visit '/discover'
+      visit discover_path
 
       click_button 'Find Top Rated Movies'
 

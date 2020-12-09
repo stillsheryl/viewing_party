@@ -1,6 +1,6 @@
 <h1>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h1>
 
-<%= button_to 'Discover Movies', '/discover', method: 'get' %>
+<%= button_to 'Discover Movies', discover_path, method: 'get' %>
 
 <section id='Friends'>
   <h2>Friends</h2>

@@ -38,8 +38,7 @@ class MovieApiService
     response = conn.get("/3/movie/#{movie_id}") do |movie|
       movie.params[:append_to_response] = 'reviews,credits'
     end
-
-    MovieObject.new(parse_data(response))
+    parse_data(response)
   end
 
   private_class_method

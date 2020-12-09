@@ -23,7 +23,7 @@ describe 'As a user' do
 
     click_button 'Discover Movies'
 
-    expect(current_path).to eq('/discover')
+    expect(current_path).to eq(discover_path)
   end
 
   it "Page has a textbox and a button to add friend" do

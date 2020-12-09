@@ -15,6 +15,10 @@ describe 'User Registration' do
 
       expect(current_path).to eq('/dashboard')
       expect(page).to have_content('Your account has successfully been created, Sam.')
+
+      user = User.last
+
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
     it 'displays an error if any required field is left blank' do
@@ -76,16 +80,6 @@ describe 'User Registration' do
       expect(find_field('Email').value).to eq 'sam@email.com'
       expect(find_field('Password').value).to eq nil
       expect(find_field('Password confirmation').value).to eq nil
-    end
-
-    it 'sends an email when user is created' do
-      user = User.new(first_name: 'Zach',
-                       last_name: 'Stearns',
-                           email: 'zach@email.com',
-                        password: 'password')
-
-      expect { UserMailer.welcome_email(user, user.email) }
-        .to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 end

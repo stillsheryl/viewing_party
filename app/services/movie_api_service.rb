@@ -3,7 +3,7 @@ class MovieApiService
     top_movies = []
     page_number = 0
 
-    2.times do
+    until top_movies.count == 40
       page_number += 1
       response = conn.get('/3/movie/top_rated') do |movie|
         movie.params[:page] = page_number

@@ -1,0 +1,110 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/movie?api_key=<DONT_EXPOSE_DATA>&page=1&query=forrest%20gump
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 09 Dec 2020 20:57:54 GMT
+      Server:
+      - openresty
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, DELETE, OPTIONS
+      Access-Control-Expose-Headers:
+      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After,
+        Content-Length, Content-Range
+      Cache-Control:
+      - public, max-age=600
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 0e018abb74f4918cb6e427c3e0a7ee33.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - DEN50-C2
+      X-Amz-Cf-Id:
+      - Gf_ZLDDr7IBZDHnUPnFAvQg_zXd0Elj1wMAn6KwQxQ8tyVq0iL_7gw==
+      Age:
+      - '127'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJwYWdlIjoxLCJyZXN1bHRzIjpbeyJhZHVsdCI6ZmFsc2UsImJhY2tkcm9wX3BhdGgiOiIvN2M5VVZQUGlUUGx0b3V4UlZZNk45dXVnYVZBLmpwZyIsImdlbnJlX2lkcyI6WzM1LDE4LDEwNzQ5XSwiaWQiOjEzLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfdGl0bGUiOiJGb3JyZXN0IEd1bXAiLCJvdmVydmlldyI6IkEgbWFuIHdpdGggYSBsb3cgSVEgaGFzIGFjY29tcGxpc2hlZCBncmVhdCB0aGluZ3MgaW4gaGlzIGxpZmUgYW5kIGJlZW4gcHJlc2VudCBkdXJpbmcgc2lnbmlmaWNhbnQgaGlzdG9yaWMgZXZlbnRz4oCUaW4gZWFjaCBjYXNlLCBmYXIgZXhjZWVkaW5nIHdoYXQgYW55b25lIGltYWdpbmVkIGhlIGNvdWxkIGRvLiBCdXQgZGVzcGl0ZSBhbGwgaGUgaGFzIGFjaGlldmVkLCBoaXMgb25lIHRydWUgbG92ZSBlbHVkZXMgaGltLiIsInBvcHVsYXJpdHkiOjQwLjQyMywicG9zdGVyX3BhdGgiOiIvaDVKNFc0dmV5eE1YRE1qZU54Wkk0NlRzSE9iLmpwZyIsInJlbGVhc2VfZGF0ZSI6IjE5OTQtMDctMDYiLCJ0aXRsZSI6IkZvcnJlc3QgR3VtcCIsInZpZGVvIjpmYWxzZSwidm90ZV9hdmVyYWdlIjo4LjUsInZvdGVfY291bnQiOjE5MzgyfSx7ImFkdWx0IjpmYWxzZSwiYmFja2Ryb3BfcGF0aCI6bnVsbCwiZ2VucmVfaWRzIjpbOTldLCJpZCI6MjM3MzUzLCJvcmlnaW5hbF9sYW5ndWFnZSI6ImVuIiwib3JpZ2luYWxfdGl0bGUiOiJUaHJvdWdoIHRoZSBFeWVzIG9mIEZvcnJlc3QgR3VtcCIsIm92ZXJ2aWV3IjoiQSBsb29rIGJlaGluZCB0aGUgc2NlbmVzIG9mIFJvYmVydCBaZW1lY2tpcycgMTk5NCBPc2Nhci13aW5uaW5nIGZpbG0sICdGb3JyZXN0IEd1bXAnLiIsInBvcHVsYXJpdHkiOjUuMjIsInBvc3Rlcl9wYXRoIjoiL2RmakxFMUhqZFI5WGhFcE4wNGVsQ0dVT0pmQS5qcGciLCJyZWxlYXNlX2RhdGUiOiIxOTk0LTEwLTAxIiwidGl0bGUiOiJUaHJvdWdoIHRoZSBFeWVzIG9mIEZvcnJlc3QgR3VtcCIsInZpZGVvIjpmYWxzZSwidm90ZV9hdmVyYWdlIjo4LjUsInZvdGVfY291bnQiOjEzfV0sInRvdGFsX3BhZ2VzIjoxLCJ0b3RhbF9yZXN1bHRzIjoyfQ==
+  recorded_at: Wed, 09 Dec 2020 21:00:01 GMT
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/movie?api_key=<DONT_EXPOSE_DATA>&page=2&query=forrest%20gump
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '57'
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 09 Dec 2020 20:57:54 GMT
+      Server:
+      - openresty
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, DELETE, OPTIONS
+      Access-Control-Expose-Headers:
+      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After,
+        Content-Length, Content-Range
+      Etag:
+      - 11763acc8ba9ee49f1f166ce39a34730
+      Cache-Control:
+      - public, max-age=600
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 6cab218159221ab723900fb6fe65d73f.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - DEN50-C2
+      X-Amz-Cf-Id:
+      - Ei2Pfsi6w9nsST_2d-0yT5YWdJ7zWHsExAnWY2L9YCTD1vtrim2Nng==
+      Age:
+      - '127'
+    body:
+      encoding: UTF-8
+      string: '{"page":2,"results":[],"total_pages":1,"total_results":2}'
+  recorded_at: Wed, 09 Dec 2020 21:00:01 GMT
+recorded_with: VCR 6.0.0

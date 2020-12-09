@@ -23,7 +23,7 @@
   <h2>Viewing Parties</h2>
   <% current_user.parties.each do |party| %>
     <section id='party-<%= party.id %>'>
-      <%= party.movie.title %><br>
+      <%= link_to party.movie.title, "/movies/#{party.movie.api_id}" %> <br>
       <%= party.formatted_date %><br>
       <%= party.formatted_time %>
       <% if current_user.id == party.user_id %>

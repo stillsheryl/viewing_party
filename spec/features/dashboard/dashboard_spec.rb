@@ -84,12 +84,11 @@ describe 'As a user' do
 
     VCR.use_cassette('retreive_avengers') do
       visit dashboard_path
-
       within "#party-#{@party.id}" do
         click_link("#{@movie.title}")
       end
 
-      expect(current_path).to eq(movie_show_path("#{@avengers.movie_id}"))
+      expect(current_path).to eq(movie_show_path(@avengers.movie_id))
     end
   end
 end

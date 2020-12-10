@@ -1,6 +1,8 @@
 language: ruby
 rbenv:
 - 2.5.3
+node_js:
+  - 10
 addons:
   postgresql: 9.6
 script:

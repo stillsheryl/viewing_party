@@ -1,7 +1,6 @@
 class SearchFacade
   def self.movie_search(title)
     movies = MovieApiService.movie_search(title)
-
     movies.map do |movie|
       SimilarMovie.new(movie)
     end
@@ -23,7 +22,7 @@ class SearchFacade
   def self.upcoming_movies
     movies = MovieApiService.upcoming_movies
     movies.map do |movie|
-     UpcomingMovie.new(movie)
+      UpcomingMovie.new(movie)
     end
   end
 end

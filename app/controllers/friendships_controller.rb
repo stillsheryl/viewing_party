@@ -12,7 +12,7 @@ class FriendshipsController < ApplicationController
 
       email_info = {
         user: current_user,
-        friend: friend.first_name,
+        friend: friend.first_name
       }
 
       FriendNotifierMailer.inform(email_info, recipient).deliver_now

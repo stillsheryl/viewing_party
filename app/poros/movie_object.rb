@@ -19,6 +19,7 @@ class MovieObject
     @cast = attributes[:credits][:cast]
     @reviews = attributes[:reviews][:results]
     @poster = attributes[:poster_path]
+    @similar_movies = attributes[:similar][:results]
   end
 
   def review_count
@@ -40,6 +41,16 @@ class MovieObject
     @reviews.map do |review_data|
       Review.new(review_data)
     end
+  end
+
+  def similar_movies
+    movies = []
+    @similar_movies.each_with_index do |movie, index|
+      movies << SimilarMovie.new(movie)
+      index += 1
+      break if index == 6
+    end
+    movies
   end
 
   def formatted_cast

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require './app/poros/movie_object'
+require './app/poros/movie_details'
 describe "As a authenticated user" do
   before :each do
     User.create(email: 'test@gmail.com', password: 'test', first_name: 'Alex', last_name: 'Rivero')

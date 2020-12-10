@@ -5,7 +5,7 @@ class SearchFacade
 
   def self.movie_details(movie_id)
     response = MovieApiService.get_movie_details(movie_id)
-    MovieObject.new(response)
+    MovieDetails.new(response)
   end
 
   def self.top_rated_movies

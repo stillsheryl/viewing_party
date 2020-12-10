@@ -1,5 +1,5 @@
 require 'rails_helper'
-require './app/poros/movie_object'
+require './app/poros/movie_details'
 describe 'As an authenticated user' do
   describe 'When I visit the new viewing party page' do
     before(:each) do

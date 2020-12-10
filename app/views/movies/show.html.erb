@@ -48,6 +48,28 @@
           <%= review.content %>
         </section><br>
       <% end %>
+    </section><br>
+  <% end %>
+
+  <b><%= @movie.review_count %> Reviews</b><br>
+  <% if @movie.reviews != []%>
+    <section class='reviews'>
+      <% @movie.formatted_reviews.each do |review| %>
+        <section id='review-<%= review.review_id %>'>
+          <b>Author: <%= review.author %></b><br>
+          <%= review.content %>
+        </section><br>
+      <% end %>
     </section>
   <% end %>
+  <br>
+  <b>Similar Movies</b>
+  <section id="similar-movies">
+    <% @movie.similar_movies.each do |movie| %>
+    <p>
+      <%= link_to movie.title, "/movies/#{movie.movie_id}" %>
+      Average Rating: <%= movie.vote_average %>
+    </p>
+  <% end %>
+  </section>
 </div>

@@ -53,7 +53,7 @@ class MovieApiService
 
   def self.get_movie_details(movie_id)
     response = conn.get("/3/movie/#{movie_id}") do |movie|
-      movie.params[:append_to_response] = 'reviews,credits'
+      movie.params[:append_to_response] = 'reviews,credits,similar'
     end
     parse_data(response)
   end

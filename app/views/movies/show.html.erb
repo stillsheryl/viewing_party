@@ -49,3 +49,13 @@
     <% end %>
   </section>
 <% end %>
+
+<b>Similar Movies</b>
+<section id="similar-movies">
+  <% @movie.similar_movies.each do |movie| %>
+  <p>
+    <%= link_to movie.title, "/movies/#{movie.movie_id}" %>
+    Average Rating: <%= movie.vote_average %>
+  </p>
+<% end %>
+</section>

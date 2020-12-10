@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe MovieObject do
+describe MovieDetails do
   before :each do
     @attrs = {
       id: 235,
@@ -10,17 +10,18 @@ describe MovieObject do
       genres: [{name: 'Action'}, {name: 'Adventure'}],
       overview: 'Demon Slayer: Kimetsu no Yaiba the Movie: Mugen Train, also known as Demon Slayer: Mugen Train or Demon Slayer: Infinity Train, is a 2020 Japanese anime period action film, based on the shōnen manga series Demon Slayer: Kimetsu no Yaiba',
       credits: {cast: [{cast_id: 123, name: 'Hanae, Natsuki', character: 'Kamado, Tanjirou'}, {cast_id: 321, name: 'Kitou, Akari', character: 'Kamado, Nezuko'}]},
-      reviews: {results: [ { author: 'Gotouge, Koyoharu', id: 256, content: 'content' }]}
+      reviews: {results: [ { author: 'Gotouge, Koyoharu', id: 256, content: 'content' }]},
+      similar: {results: [title: 'Your name', id: 34566, vote_average: 8.4]}
     }
 
-    @movie = MovieObject.new(@attrs)
+    @movie = MovieDetails.new(@attrs)
   end
 
   it "exists" do
     cast_expected = [{:cast_id=>123,:character=>"Kamado, Tanjirou", :name=>"Hanae, Natsuki"}, {:cast_id=>321,:character=>"Kamado, Nezuko", :name=>"Kitou, Akari"}]
     reviews_expected = [{:author=>"Gotouge, Koyoharu", :content=>"content", :id=>256}]
 
-    expect(@movie).to be_a MovieObject
+    expect(@movie).to be_a MovieDetails
     expect(@movie.movie_id).to eq(@attrs[:id])
     expect(@movie.vote_average).to eq(@attrs[:vote_average])
     expect(@movie.title).to eq(@attrs[:title])
@@ -56,7 +57,7 @@ describe MovieObject do
 
   it "retrieve_genres returns an ampty string of genres is an empty array" do
     @attrs[:genres] = []
-    movie = MovieObject.new(@attrs)
+    movie = MovieDetails.new(@attrs)
 
     expect(movie.retrieve_genres).to eq('')
   end
@@ -67,8 +68,20 @@ describe MovieObject do
 
   it "runtime_conversion returns only the min if length does not make it to hours" do
     @attrs[:runtime] = 46
-    movie = MovieObject.new(@attrs)
+    movie = MovieDetails.new(@attrs)
 
     expect(movie.runtime_conversion).to eq('46 min')
+  end
+
+  it "runtime_conversion returns only the min if length does not make it to hours" do
+    @attrs[:runtime] = 46
+    movie = MovieDetails.new(@attrs)
+
+    expect(movie.runtime_conversion).to eq('46 min')
+  end
+
+  it "similar_movies returns an array of SimilarMovie objects" do
+    expect(@movie.similar_movies.class).to eq(Array)
+    expect(@movie.similar_movies.first).to be_a SimilarMovie
   end
 end

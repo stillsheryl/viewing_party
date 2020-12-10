@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-
   def welcome_email(info, recipient)
     @user = info[:user]
     @url = 'https://viewing-party-13.herokuapp.com'

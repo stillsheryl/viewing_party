@@ -67,7 +67,7 @@ describe 'As a user' do
     visit dashboard_path
 
     within id="#party-#{@party.id}" do
-      expect(page).to have_content('Avengers')
+      expect(page).to have_link('Avengers')
       expect(page).to have_content('December 1, 2020')
       expect(page).to have_content('2:00 PM')
       expect(page).to have_content('Invited')

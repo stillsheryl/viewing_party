@@ -80,8 +80,8 @@ describe MovieDetails do
     expect(movie.runtime_conversion).to eq('46 min')
   end
 
-  it "similar_movies returns an array of SimilarMovie objects" do
+  it "similar_movies returns an array of MovieSearch objects" do
     expect(@movie.similar_movies.class).to eq(Array)
-    expect(@movie.similar_movies.first).to be_a SimilarMovie
+    expect(@movie.similar_movies.first).to be_a MovieSearch
   end
 end

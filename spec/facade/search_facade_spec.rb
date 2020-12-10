@@ -17,7 +17,7 @@ describe SearchFacade do
       movies = SearchFacade.movie_search("star")
 
       expect(movies.class).to eq(Array)
-      expect(movies[0]).to be_a(SimilarMovie)
+      expect(movies[0]).to be_a(MovieSearch)
 
       expect(movies[0].title).to eq("Star Wars")
       expect(movies[39].title).to eq("The Sun Is Also a Star")
@@ -29,7 +29,7 @@ describe SearchFacade do
       top_movies = SearchFacade.top_rated_movies
 
       expect(top_movies.class).to eq(Array)
-      expect(top_movies.first).to be_a(SimilarMovie)
+      expect(top_movies.first).to be_a(MovieSearch)
 
       expect(top_movies[0].title).to eq("Gabriel's Inferno Part III")
       expect(top_movies[0].vote_average).to eq(9.3)

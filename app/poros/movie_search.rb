@@ -1,4 +1,4 @@
-class SimilarMovie
+class MovieSearch
   attr_reader :movie_id,
               :title,
               :vote_average

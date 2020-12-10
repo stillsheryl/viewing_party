@@ -10,7 +10,12 @@ describe 'As a user' do
     click_button 'Sign In'
 
     @current_user = User.last
-    @movie = Movie.create!(title: 'Avengers', api_id: 550)
+
+    VCR.use_cassette('movie_details') do
+      @your_name = SearchFacade.movie_details('372058')
+    end
+
+    @movie = Movie.create!(title: "#{@your_name.title}", api_id: "#{@your_name.movie_id}")
     @party = Party.create!(user_id: @current_user.id, movie_id: @movie.id, date: '1/12/2020', time: '2:00 PM', duration: 220)
   end
 
@@ -45,7 +50,7 @@ describe 'As a user' do
     visit dashboard_path
 
     within id="#party-#{@party.id}" do
-      expect(page).to have_content('Avengers')
+      expect(page).to have_content('Your Name.')
       expect(page).to have_content('December 1, 2020')
       expect(page).to have_content('2:00 PM')
       expect(page).to have_content('Hosting')
@@ -67,10 +72,23 @@ describe 'As a user' do
     visit dashboard_path
 
     within id="#party-#{@party.id}" do
-      expect(page).to have_content('Avengers')
+      expect(page).to have_link("#{@movie.title}")
       expect(page).to have_content('December 1, 2020')
       expect(page).to have_content('2:00 PM')
       expect(page).to have_content('Invited')
+    end
+  end
+
+  it "Clicking on the movie name in the viewing party display takes me to the movie show page" do
+    Guest.create(party_id: @party.id, user_id: @current_user.id, attending: true)
+
+    VCR.use_cassette('movie_details') do
+      visit dashboard_path
+      within "#party-#{@party.id}" do
+        click_link("#{@movie.title}")
+      end
+
+      expect(current_path).to eq(movie_show_path(@your_name.movie_id))
     end
   end
 end

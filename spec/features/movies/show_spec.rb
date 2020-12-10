@@ -91,7 +91,7 @@ describe "As a authenticated user" do
 
       expect(page).to have_content("#{@movie_details.review_count} Reviews")
 
-      within('#reviews') do
+      within('.reviews') do
         #testing first review
         within("#review-#{@movie_details.reviews[0][:id]}") do
           expect(page).to have_content("Author: #{@movie_details.reviews[0][:author]}")

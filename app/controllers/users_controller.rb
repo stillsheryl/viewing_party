@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
 
-      send_welcome_email(@user)
+      # send_welcome_email(@user)
 
       flash[:notice] = "Your account has successfully been created, #{@user.first_name}."
       redirect_to dashboard_path
@@ -24,9 +24,9 @@ class UsersController < ApplicationController
     params.permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
-  def send_welcome_email(user)
-    email_info = { user: user }
-
-    UserMailer.welcome_email(email_info, user.email).deliver_now
-  end
+  # def send_welcome_email(user)
+  #   email_info = { user: user }
+  #
+  #   UserMailer.welcome_email(email_info, user.email).deliver_now
+  # end
 end

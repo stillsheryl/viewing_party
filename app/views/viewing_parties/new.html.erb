@@ -1,29 +1,31 @@
-<h2>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
+<h1>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h1><br>
 
-<h3>Viewing Party Details</h3>
+<div class="container">
+  <h3>Viewing Party Details</h3><br>
 
-<section id="details">
-  <p>
-    Movie Title  <%= @movie.title %>
-  </p>
-  <%= form_with url: viewing_party_create_path, local: true do |f| %>
-    <%= f.label :duration_of_party %>
-    <%= f.number_field :duration_of_party, value: @movie.runtime, min: @movie.runtime %><br>
-    <%= f.label :date %>
-    <%= f.date_field :date %><br>
+  <section id="details">
+    <p>
+      Movie Title  <%= @movie.title %>
+    </p>
+    <%= form_with url: viewing_party_create_path, local: true do |f| %>
+      <%= f.label :duration_of_party %>
+      <%= f.number_field :duration_of_party, value: @movie.runtime, min: @movie.runtime %><br><br>
+      <%= f.label :date %>
+      <%= f.date_field :date %><br><br>
 
-    <%= f.label :time %>
-    <%= f.time_field :time %><br>
+      <%= f.label :time %>
+      <%= f.time_field :time %><br><br>
 
-    <section id='friends'>
-      <% current_user.friends.each do |friend| %>
-          <%= f.check_box :"friend-#{friend.id}"%>
-          <%= f.label :"#{friend.first_name + " " + friend.last_name}" %>
-      <% end %>
-    </section>
+      <section id='friends'>
+        <% current_user.friends.each do |friend| %>
+            <%= f.check_box :"friend-#{friend.id}"%>
+            <%= f.label :"#{friend.first_name + " " + friend.last_name}" %><br><br>
+        <% end %>
+      </section>
 
-    <%= f.hidden_field :movie_id, value: @movie.api_id %>
+      <%= f.hidden_field :movie_id, value: @movie.api_id %>
 
-    <%= f.submit 'Create Party' %>
-  <% end %>
-</section>
+      <%= f.submit 'Create Party', class: "btn btn-outline-primary" %>
+    <% end %>
+  </section>
+</div>

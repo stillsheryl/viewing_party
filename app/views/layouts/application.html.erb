@@ -15,12 +15,13 @@
   </nav>
 
   <% flash.each do |name, msg| %>
-    <div class= "<%=name%>-flash">
+    <div class= "<%=name%>-flash message">
       <p><%= msg %></p>
     </div>
   <% end %>
 
   <body>
+
     <main>
       <%= yield %>
     </main>

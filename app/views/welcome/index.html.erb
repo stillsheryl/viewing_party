@@ -1,11 +1,12 @@
-<h1>Welcome to Viewing Party!</h1>
+<h1>Welcome to Viewing Party!</h1><br>
 
-<h3 id="description">Finally, a place where you can enjoy all your favorite movies with all your best friends!</h3>
+<h3 id="description">Finally, a place where you can enjoy all your favorite movies with all your best friends!</h3><br>
 
-<%= form_with url: login_path, local: true do |f| %>
-  <%= f.text_field :email, placeholder: 'Enter Email' %> <br><br>
-  <%= f.password_field :password, placeholder: 'Enter Password' %> <br><br>
-  <%= f.submit "Sign In" %>
-<% end %> <br>
-
-<%= link_to 'New to Viewing Party? Register Here!', registration_path %>
+<section class="container">
+  <%= form_with url: login_path, local: true do |f| %>
+    <%= f.text_field :email, placeholder: 'Enter Email' %> <br><br>
+    <%= f.password_field :password, placeholder: 'Enter Password' %> <br><br>
+    <%= f.submit "Sign In", class: "btn btn-outline-success" %>
+  <% end %> <br><br><br>
+  <%= link_to 'New to Viewing Party? Register Here!', registration_path, class: "btn btn-outline-primary" %>
+</section>

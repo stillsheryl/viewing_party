@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
 
 body {
   display: flex;
@@ -30,17 +32,42 @@ footer {
   flex-direction: row;
 }
 
+h1 {
+  text-align:center;
+  padding-top: 40px;
+}
+
 .topnav a {
   float: right;
   text-align: center;
+  padding-top: 15px;
+  padding-right: 15px;
 }
 
 .movie-column {
   width: 50%;
   float: left;
+  margin: 2px;
 }
 
 .vote-column {
   width: 50%;
   float: right;
+}
+
+.container {
+  text-align: center;
+}
+
+.indent {
+  margin: 30px;;
+}
+
+.message {
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+#description {
+  text-align: center;
 }

@@ -15,6 +15,10 @@ describe 'User Registration' do
 
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content('Your account has successfully been created, Sam.')
+
+      user = User.last
+
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
     it 'displays an error if any required field is left blank' do

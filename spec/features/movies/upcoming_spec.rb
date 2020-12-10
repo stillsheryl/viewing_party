@@ -10,19 +10,19 @@ describe 'As a user' do
     click_button 'Sign In'
   end
 
-  it "When i click on Find Top Movies in discover I am taken to the top 40 movies link" do
-    VCR.use_cassette('top_rated_movies') do
+  it "From the discover page I can click on Upcoming movies and see upcoming movies page" do
+    VCR.use_cassette('upcoming_movies') do
       visit discover_path
 
-      click_button 'Find Top Rated Movies'
+      click_button 'Upcoming Movies'
 
-      expect(current_path).to eq(movies_top_rated_path)
+      expect(current_path).to eq(movies_upcoming_path)
     end
   end
 
-  it "There are 40 top rated movies on the page" do
-    VCR.use_cassette('top_rated_movies') do
-      visit movies_top_rated_path
+  it "There are 40 upcoming movies on the page" do
+    VCR.use_cassette('upcoming_movies') do
+      visit movies_upcoming_path
 
       expect(page).to have_css('.movie-column', count: 40)
       expect(page).to have_css('.vote-column', count: 40)

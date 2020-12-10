@@ -6,7 +6,8 @@ class MovieObject
               :genres,
               :overview,
               :cast,
-              :reviews
+              :reviews,
+              :poster
 
   def initialize(attributes)
     @movie_id = attributes[:id]
@@ -17,6 +18,7 @@ class MovieObject
     @overview = attributes[:overview]
     @cast = attributes[:credits][:cast]
     @reviews = attributes[:reviews][:results]
+    @poster = attributes[:poster_path]
   end
 
   def review_count

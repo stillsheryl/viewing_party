@@ -17,6 +17,7 @@ describe 'As a user' do
 
     expect(page).to have_button('Find Top Rated Movies')
     expect(page).to have_button('Find Movies')
+    expect(page).to have_button('Upcoming Movies')
   end
 
   it "if I try to click on the search button without entering anything, I stay on the discover page" do

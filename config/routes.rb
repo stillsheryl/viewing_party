@@ -14,8 +14,9 @@ Rails.application.routes.draw do
   get '/discover', to: 'dashboard#discover'
 
   get '/movies', to: 'movies#index'
+  get '/movies/upcoming', to: 'movies#upcoming'
   get '/movies/top_rated', to: 'movies#top_rated'
-  get '/movies/:movie_id', to: 'movies#show', as: :movie_show 
+  get '/movies/:movie_id', to: 'movies#show', as: :movie_show
 
   post '/friendships/new', to: 'friendships#create'
 

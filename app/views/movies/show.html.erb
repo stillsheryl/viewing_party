@@ -15,6 +15,10 @@
   </p>
 </section>
 
+<% if !@movie.poster.nil? %>
+  <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/<%= @movie.poster %>" class="image" alt="movie poster" width="30%">
+<% end %>
+
 <section id='summary'>
   <p>
     <b>Summary</b><br>

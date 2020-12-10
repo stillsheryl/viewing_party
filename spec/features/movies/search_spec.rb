@@ -34,6 +34,14 @@ describe "As a registered user" do
       end
     end
 
+    it "I can return less than 40 results", :vcr do
+        visit discover_path
+        fill_in :movie_title, with: 'forrest gump'
+        click_button 'Find Movies'
+
+        expect(page).to have_css('.movie-column', count: 2)
+    end
+
     it "I see no more than 40 results" do
       VCR.use_cassette('movie_search') do
         visit discover_path

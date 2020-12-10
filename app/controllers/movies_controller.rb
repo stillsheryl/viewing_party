@@ -17,4 +17,8 @@ class MoviesController < ApplicationController
   def top_rated
     @top_movies = SearchFacade.top_rated_movies
   end
+
+  def upcoming
+    @upcoming_movies = SearchFacade.upcoming_movies
+  end
 end

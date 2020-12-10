@@ -34,12 +34,14 @@ footer {
 
 h1 {
   text-align:center;
-  padding-top: 50px;
+  padding-top: 40px;
 }
 
 .topnav a {
   float: right;
   text-align: center;
+  padding-top: 15px;
+  padding-right: 15px;
 }
 
 .movie-column {
@@ -59,6 +61,11 @@ h1 {
 
 .indent {
   margin: 30px;;
+}
+
+.message {
+  padding-top: 25px;
+  padding-left: 25px;
 }
 
 #description {

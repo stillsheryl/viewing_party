@@ -12,11 +12,11 @@
 
 <ol>
   <% @top_movies.each do |movie| %>
-  <section id='movie-<%= movie[:id] %>' class="movie-column">
-      <li><%= link_to movie[:title], "/movies/#{movie[:id]}" %></li>
+  <section id='movie-<%= movie.movie_id %>' class="movie-column">
+      <li><%= link_to movie.title, "/movies/#{movie.movie_id}" %></li>
   </section>
   <div class="vote-column">
-      Vote Average: <%= movie[:vote_average] %>
+      Vote Average: <%= movie.vote_average %>
   </div>
   <% end %>
 </ol>

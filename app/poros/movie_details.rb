@@ -46,7 +46,7 @@ class MovieDetails
   def similar_movies
     movies = []
     @similar_movies.each_with_index do |movie, index|
-      movies << SimilarMovie.new(movie)
+      movies << MovieSearch.new(movie)
       index += 1
       break if index == 6
     end

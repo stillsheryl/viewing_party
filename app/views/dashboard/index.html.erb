@@ -13,17 +13,17 @@
         <p><%= friend.first_name %> <%= friend.last_name %></p>
       <% end %>
     <% end %>
-  <%= form_with url: friendships_new_path, method: 'post', local: true do |f| %>
-    <%= f.text_field :email , placeholder: "Friend's Email"%>
-    <%= f.submit "Add Friend" %><br><br><br>
-  <% end %>
-</section><br>
+    <%= form_with url: friendships_new_path, method: 'post', local: true do |f| %>
+      <%= f.text_field :email , placeholder: "Friend's Email"%>
+      <%= f.submit "Add Friend" %><br><br><br>
+    <% end %>
+  </section><br>
 
   <section id='Viewing_Parties'>
     <h2>Viewing Parties</h2>
     <% current_user.parties.each do |party| %>
       <section id='party-<%= party.id %>'>
-        <%= party.movie.title %><br>
+        <%= link_to party.movie.title, "/movies/#{party.movie.api_id}" %> <br>
         <%= party.formatted_date %><br>
         <%= party.formatted_time %>
         <% if current_user.id == party.user_id %>

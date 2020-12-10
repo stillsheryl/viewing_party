@@ -32,6 +32,11 @@ footer {
   flex-direction: row;
 }
 
+h1 {
+  text-align:center;
+  padding-top: 50px;
+}
+
 .topnav a {
   float: right;
   text-align: center;
@@ -40,9 +45,22 @@ footer {
 .movie-column {
   width: 50%;
   float: left;
+  margin: 2px;
 }
 
 .vote-column {
   width: 50%;
   float: right;
+}
+
+.container {
+  text-align: center;
+}
+
+.indent {
+  margin: 30px;;
+}
+
+#description {
+  text-align: center;
 }

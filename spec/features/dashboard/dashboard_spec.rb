@@ -82,7 +82,7 @@ describe 'As a user' do
   it "Clicking on the movie name in the viewing party display takes me to the movie show page" do
     Guest.create(party_id: @party.id, user_id: @current_user.id, attending: true)
 
-    VCR.use_cassette('get_movie_details') do
+    VCR.use_cassette('retreive_avengers') do
       visit dashboard_path
 
       within "#party-#{@party.id}" do

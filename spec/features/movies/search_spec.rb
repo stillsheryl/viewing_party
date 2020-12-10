@@ -61,8 +61,8 @@ describe "As a registered user" do
       fill_in :movie_title, with: ' '
       click_button 'Find Movies'
 
-      expect(current_path).to eq(movies_path)
-      expect(page).to have_content('No results match your search!')
+      expect(current_path).to eq(discover_path)
+      expect(page).to have_content('Search field cannot be blank')
     end
 
     it "testing no match again", :vcr do

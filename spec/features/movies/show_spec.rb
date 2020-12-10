@@ -1,5 +1,5 @@
 require 'rails_helper'
-require './app/poros/movie_object'
+require './app/poros/movie_details'
 describe "As a authenticated user" do
   before :each do
     User.create(email: 'test@gmail.com', password: 'test', first_name: 'Alex', last_name: 'Rivero')
@@ -19,7 +19,7 @@ describe "As a authenticated user" do
     end
 
     VCR.use_cassette('movie_no_genres_reviews') do
-      @movie_no_genres_reviews_object = SearchFacade.movie_details(@movie_no_genres_reviews[:id].to_s)
+      @movie_no_genres_reviews_object = SearchFacade.movie_details(@movie_no_genres_reviews.movie_id.to_s)
     end
 
     VCR.use_cassette('movie_no_image') do
@@ -127,6 +127,33 @@ describe "As a authenticated user" do
       visit movie_show_path(@movie_no_image_object.movie_id)
 
       expect(page).to_not have_css('#image')
+    end
+  end
+
+  it "I see a Similar Moves section with with similar movies to the one selected" do
+    VCR.use_cassette('movie_details') do
+      visit movie_show_path(@movie_details.movie_id)
+
+      expect(page).to have_content("Similar Movies")
+      expect(page).to have_css("#similar-movies")
+
+      within(id="#similar-movies") do
+        expect(page).to have_content(@movie_details.similar_movies[0].title)
+      end
+    end
+  end
+
+  it "When I click on the name of a similar movie i am taken to its details page" do
+    VCR.use_cassette('movie_details') do
+      visit movie_show_path(@movie_details.movie_id)
+
+      VCR.use_cassette('similar_movie') do
+        within(id="#similar-movies") do
+          click_link @movie_details.similar_movies[0].title
+        end
+
+        expect(current_path).to eq(movie_show_path(@movie_details.similar_movies[0].movie_id))
+      end
     end
   end
 end

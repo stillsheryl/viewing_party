@@ -17,10 +17,10 @@ describe SearchFacade do
       movies = SearchFacade.movie_search("star")
 
       expect(movies.class).to eq(Array)
-      expect(movies[0].class).to eq(Hash)
+      expect(movies[0]).to be_a(MovieSearch)
 
-      expect(movies[0][:title]).to eq("Star Wars")
-      expect(movies[39][:title]).to eq("The Sun Is Also a Star")
+      expect(movies[0].title).to eq("Star Wars")
+      expect(movies[39].title).to eq("The Sun Is Also a Star")
     end
   end
 
@@ -29,16 +29,16 @@ describe SearchFacade do
       top_movies = SearchFacade.top_rated_movies
 
       expect(top_movies.class).to eq(Array)
-      expect(top_movies.first.class).to eq(Hash)
+      expect(top_movies.first).to be_a(MovieSearch)
 
-      expect(top_movies[0][:title]).to eq("Gabriel's Inferno Part III")
-      expect(top_movies[0][:vote_average]).to eq(9.3)
+      expect(top_movies[0].title).to eq("Gabriel's Inferno Part III")
+      expect(top_movies[0].vote_average).to eq(9.3)
 
-      expect(top_movies[8][:title]).to eq("Your Name.")
-      expect(top_movies[8][:vote_average]).to eq(8.6)
+      expect(top_movies[8].title).to eq("Your Name.")
+      expect(top_movies[8].vote_average).to eq(8.6)
 
-      expect(top_movies[39][:title]).to eq("Grave of the Fireflies")
-      expect(top_movies[39][:vote_average]).to eq(8.4)
+      expect(top_movies[39].title).to eq("Grave of the Fireflies")
+      expect(top_movies[39].vote_average).to eq(8.4)
 
       expect(top_movies[40]).to eq(nil)
     end

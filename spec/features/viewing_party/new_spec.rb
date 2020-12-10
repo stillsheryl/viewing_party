@@ -1,5 +1,5 @@
 require 'rails_helper'
-require './app/poros/movie_object'
+require './app/poros/movie_details'
 describe 'As an authenticated user' do
   describe 'When I visit the new viewing party page' do
     before(:each) do
@@ -36,11 +36,11 @@ describe 'As an authenticated user' do
       end
 
       VCR.use_cassette('movie_details') do
-        @movie_details = SearchFacade.movie_details(@movie[:id].to_s)
+        @movie_details = SearchFacade.movie_details(@movie.movie_id.to_s)
       end
 
       VCR.use_cassette('movie_details') do
-        visit movie_show_path(@movie[:id])
+        visit movie_show_path(@movie.movie_id)
         click_button 'Create viewing party for movie'
       end
     end

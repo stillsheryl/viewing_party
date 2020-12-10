@@ -1,5 +1,4 @@
 class MovieApiService
-
   def self.upcoming_movies
     upcoming_movies = []
     page_number = 1
@@ -40,7 +39,7 @@ class MovieApiService
 
     2.times do
       page_number += 1
-      response = conn.get("/3/search/movie") do |req|
+      response = conn.get('/3/search/movie') do |req|
         req.params[:query] = query
         req.params[:page] = page_number
       end
@@ -57,8 +56,6 @@ class MovieApiService
     end
     parse_data(response)
   end
-
-  private_class_method
 
   def self.conn
     Faraday.new(url: 'https://api.themoviedb.org') do |faraday|

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
 
       email_info = {
-        user: @user,
+        user: @user
       }
 
       UserMailer.welcome_email(email_info, @user.email).deliver_now

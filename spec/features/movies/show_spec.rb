@@ -19,7 +19,7 @@ describe "As a authenticated user" do
     end
 
     VCR.use_cassette('movie_no_genres_reviews') do
-      @movie_no_genres_reviews_object = SearchFacade.movie_details(@movie_no_genres_reviews[:id].to_s)
+      @movie_no_genres_reviews_object = SearchFacade.movie_details(@movie_no_genres_reviews.movie_id.to_s)
     end
 
     VCR.use_cassette('movie_no_image') do

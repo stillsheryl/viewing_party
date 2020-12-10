@@ -7,7 +7,7 @@ class FriendshipsController < ApplicationController
       error_message(friend)
     else
       Friendship.create(user_id: current_user.id, friend_id: friend.id)
-      send_email(friend)
+      # send_email(friend)
     end
     redirect_to dashboard_path
   end
@@ -22,15 +22,15 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  def send_email(friend)
-    recipient = friend.email
-
-    email_info = {
-      user: current_user,
-      friend: friend.first_name
-    }
-
-    FriendNotifierMailer.inform(email_info, recipient).deliver_now
-    flash[:notice] = "We let #{friend.first_name} know that you added them as a friend."
-  end
+  # def send_email(friend)
+  #   recipient = friend.email
+  #
+  #   email_info = {
+  #     user: current_user,
+  #     friend: friend.first_name
+  #   }
+  #
+  #   FriendNotifierMailer.inform(email_info, recipient).deliver_now
+  #   flash[:notice] = "We let #{friend.first_name} know that you added them as a friend."
+  # end
 end

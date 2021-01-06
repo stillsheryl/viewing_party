@@ -3,6 +3,7 @@
 This is a three-person group project as part of Turing School of Software and Design's Back-End Engineering program, Module 3.  We utilized our knowledge in Ruby on Rails, ActiveRecord and PostgreSQL to build a website for creating movie watch parties created by users, for users.  We introduced our new knowledge of consuming APIs to pull movie data from TheMovieDB's API.
 
 #### [Visit Deployed Application](https://viewing-party-13.herokuapp.com/)
+    (Note: it may load slowly)
 
 ## Table of Contents
 
